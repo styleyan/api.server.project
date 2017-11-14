@@ -2,11 +2,11 @@
  * hao.isyxf.com 相关数据增删改查
  */
 const mongoose = require('mongoose')
-const {mongodb} = require('../../server.config')
-const Navs = require('../../models/hao.isyxf.com/navs')
+const {mongoHost, mongoPort} = require('../../server.config')
+const Navs = require('../../models/hao.isyxf.com/www')
 
 // 链接数据
-mongoose.connect(`${mongodb.ip}/hao_isyxf_com/navs`)
+mongoose.connect(`${mongoHost}:${mongoPort}/hao_isyxf_com/navs`)
 
 // 监听是否链接成功
 mongoose.connection.on('connected', () => {
@@ -44,7 +44,7 @@ function getData() {
 }
 
 module.exports = function (router) {
-  router.get('/haoApi/example', async (ctx) => {
+  router.get('/api/hao/nav', async (ctx) => {
     const datas = await getData()
     console.log(datas)
     ctx.body = datas
