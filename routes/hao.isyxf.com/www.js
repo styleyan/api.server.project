@@ -44,7 +44,7 @@ function getData() {
 }
 
 module.exports = function (router) {
-  router.get('/api/hao/nav', async (ctx) => {
+  router.post('/api/hao/list', async (ctx) => {
     const datas = await getData()
     console.log(datas)
     ctx.body = datas
