@@ -44,9 +44,21 @@ function getData() {
 }
 
 module.exports = function (router) {
+  // 获取列表
   router.post('/api/hao/list', async (ctx) => {
     const datas = await getData()
     console.log(datas)
     ctx.body = datas
+  })
+
+  // 添加导航
+  router.post('/api/hao/add', async (ctx) => {
+    const {data} =  ctx.request.body
+    const navsData = new Navs(data)
+    const saveResult = await navsData.save()
+    console.log(saveResult)
+    ctx.body = {
+      status: 1,
+    }
   })
 }

@@ -1,14 +1,19 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 const Schema = mongoose.Schema
 
 // 建模型
 const navSchema = new Schema({
-  "url": String,
-  "name": String,
+  "websiteUrl": String,
+  "websiteName": String,
   "watch": Number,
-  "favor": Number,
-  "desc": String,
-  "logo": String
+  "favour": Number,
+  "websiteDesc": String,
+  "websiteLogo": String,
+  "createTime": String,
+  "typeName": String,
+  "type": Number,
+  "id": String,
 })
 
 // 输出模型
