@@ -10,7 +10,7 @@ const navSchema = new Schema({
   "favour": Number,
   "websiteDesc": String,
   "websiteLogo": String,
-  "createTime": String,
+  "createTime": Date,
   "typeName": String,
   "type": Number,
   "id": String,

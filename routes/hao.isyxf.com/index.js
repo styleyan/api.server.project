@@ -4,6 +4,8 @@
 const mongoose = require('mongoose')
 const {mongoHost, mongoPort} = require('../../server.config')
 const Navs = require('../../models/hao.isyxf.com/www')
+const { createdUuid, random } = require('../../utils')
+const moment = require('moment')
 
 // 链接数据
 mongoose.connect(`${mongoHost}:${mongoPort}/hao_isyxf_com/navs`)
@@ -26,7 +28,7 @@ mongoose.connection.on('disconnected', () => {
 function getData() {
   return new Promise((resolve, reject) => {
     let result = {}
-    Navs.find({}, (err, doc) => {
+    Navs.find({}).lean().exec((err, doc) => {
       if (err) {
         result.status = 0
         result.description = err.message
@@ -47,16 +49,22 @@ module.exports = function (router) {
   // 获取列表
   router.post('/api/hao/list', async (ctx) => {
     const datas = await getData()
-    console.log(datas)
+    datas.result.list.forEach((item) => {
+      item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
+    })
     ctx.body = datas
   })
 
   // 添加导航
   router.post('/api/hao/add', async (ctx) => {
     const {data} =  ctx.request.body
+    data.createTime = Date.now()
+    data.id = createdUuid()
+    data.watch = random(3000)
+    data.favour = random(3000)
     const navsData = new Navs(data)
     const saveResult = await navsData.save()
-    console.log(saveResult)
+    
     ctx.body = {
       status: 1,
     }
