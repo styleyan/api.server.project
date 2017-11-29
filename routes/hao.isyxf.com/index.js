@@ -36,7 +36,7 @@ function getData() {
       } else {
         result.status = 1
         result.result = {
-          count: doc.length,
+          pageTotal: doc.length,
           list: doc,
         }
         resolve(result)
