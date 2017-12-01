@@ -3,7 +3,10 @@
  */
 const mongoose = require('mongoose')
 const {mongoHost, mongoPort} = require('../../server.config')
+// 导航模型
 const Navs = require('../../models/hao.isyxf.com/www')
+// 用户名模型
+const User = require('../../models/admin.isyxf.com/index')
 const { createdUuid, random } = require('../../utils')
 const moment = require('moment')
 
@@ -68,5 +71,31 @@ module.exports = function (router) {
     ctx.body = {
       status: 1,
     }
+  })
+
+  // 添加导航
+  router.post('/api/admin/login', async (ctx) => {
+    const param = {...ctx.request.body}
+    const query = await User.findOne(param).exec()
+    let responsData = {}
+    if (query) {
+      responsData.status = 1
+      responsData.result = {
+        userName: query.userName
+      }
+      ctx.cookies.set('_userId', query.userId, {
+        path: '/',
+        maxAge: 10 * 60 * 1000,
+        expres: new Date('2019-02-14'),
+        httpOnly: false,
+        overwrite: false
+      })
+    } else {
+      responsData.status = 0
+      responsData.errorMsg = '用户名/密码错误'
+      responsData.code = '20021'
+    }
+    
+    ctx.body = responsData
   })
 }
