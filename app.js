@@ -5,13 +5,14 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const validateRequest = require('./middleware/validate-request')
 const router = require('koa-router')()
 const apis = require('./routes/index')(router)
 
-// error handler
+// 错误处理中间件
 onerror(app)
 
-// middlewares
+// 解析参数中间件
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
@@ -22,7 +23,7 @@ app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
 
-// logger
+// 日志中间件
 app.use(async (ctx, next) => {
   const start = new Date()
   await next()
@@ -30,7 +31,11 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-// routes api
+// 请求验证拦截
+app.use(validateRequest())
+
+
+// 路由api
 app.use(router.routes(), router.allowedMethods())
 
 module.exports = app

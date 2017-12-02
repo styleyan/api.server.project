@@ -73,7 +73,7 @@ module.exports = function (router) {
     }
   })
 
-  // 添加导航
+  // 登录
   router.post('/api/admin/login', async (ctx) => {
     const param = {...ctx.request.body}
     const query = await User.findOne(param).exec()
@@ -85,17 +85,27 @@ module.exports = function (router) {
       }
       ctx.cookies.set('_userId', query.userId, {
         path: '/',
-        maxAge: 10 * 60 * 1000,
-        expres: new Date('2019-02-14'),
+        maxAge: 10 * 60 * 1000 * 1000,
         httpOnly: false,
         overwrite: false
       })
     } else {
       responsData.status = 0
       responsData.errorMsg = '用户名/密码错误'
-      responsData.code = '20021'
+      responsData.code = '10002'
     }
     
     ctx.body = responsData
+  })
+
+  // 登出
+  router.post('/api/admin/logout', async (ctx) => {
+    ctx.cookies.set('_userId', '', {
+      path: '/',
+      maxAge: -1,
+    })
+    ctx.body = {
+      status: 1,
+    }
   })
 }
