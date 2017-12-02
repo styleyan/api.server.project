@@ -9,7 +9,7 @@ const Navs = require('../../models/hao.isyxf.com/www')
 const User = require('../../models/admin.isyxf.com/index')
 const { createdUuid, random } = require('../../utils')
 const moment = require('moment')
-
+mongoose.Promise = global.Promise
 // 链接数据
 mongoose.connect(`${mongoHost}:${mongoPort}/hao_isyxf_com/navs`)
 
@@ -28,34 +28,38 @@ mongoose.connection.on('disconnected', () => {
   console.log('MongoDB connected disconnected')
 })
 
-function getData() {
-  return new Promise((resolve, reject) => {
-    let result = {}
-    Navs.find({}).lean().exec((err, doc) => {
-      if (err) {
-        result.status = 0
-        result.description = err.message
-        reject(result)
-      } else {
-        result.status = 1
-        result.result = {
-          pageTotal: doc.length,
-          list: doc,
-        }
-        resolve(result)
-      }
-    })
-  })
-}
-
 module.exports = function (router) {
   // 获取列表
   router.post('/api/hao/list', async (ctx) => {
-    const datas = await getData()
-    datas.result.list.forEach((item) => {
-      item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
-    })
-    ctx.body = datas
+    const paramData = ctx.request.body
+    const limit = paramData.pageSize
+    let skip
+    if (paramData.pageActive > 0) {
+      skip = (paramData.pageActive - 1) * paramData.pageSize
+    } else {
+      skip = 0
+    }
+
+    const docs = await Navs.find({}, null, {skip, limit, sort:{createTime:'desc'}}).lean().exec()
+    const count = await Navs.count().exec()
+    const result = {}
+
+    if (docs) {
+      docs.forEach((item) => {
+        item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
+      })
+      result.status = 1
+      result.result = {
+        list: docs,
+        pageTotal: count,
+      }
+    } else {
+      result.status = 0
+      result.errorMsg = '查询失败'
+      result.code = '10003'
+    }
+
+    ctx.body = result
   })
 
   // 添加导航
@@ -64,7 +68,7 @@ module.exports = function (router) {
     data.createTime = Date.now()
     data.id = createdUuid()
     data.watch = random(3000)
-    data.favour = random(3000)
+    data.favour = random(1500)
     const navsData = new Navs(data)
     const saveResult = await navsData.save()
     

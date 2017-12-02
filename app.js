@@ -31,7 +31,7 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-// 请求验证拦截
+// 请求登录验证中间件
 app.use(validateRequest())
 
 
