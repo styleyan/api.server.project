@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
-const moment = require('moment')
-const Schema = mongoose.Schema
+const {Schema} = mongoose
 
 // 建模型
 const navSchema = new Schema({
@@ -17,4 +16,4 @@ const navSchema = new Schema({
 })
 
 // 输出模型
-module.exports = mongoose.model('Nav', navSchema, 'Navs')
+module.exports = mongoose.model('Nav', navSchema)
