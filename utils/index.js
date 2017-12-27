@@ -2,9 +2,9 @@ module.exports = {
   /**
    * 通过时间戳生成uuid
    */
-  createdUuid() {
+  createdUuid(pre = '') {
     const second = Number.parseInt(new Date().getTime() / 1000)
-    return second.toString(16)
+    return `${pre}${second.toString(16)}`
   },
   /**
    * 生成随机数

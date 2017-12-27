@@ -7,7 +7,7 @@ const articleSchema = new Schema({
   "content": String,
   "createTime": Date,
   "id": String,
-  "isShow": Number,
+  "isShow": Boolean,
   "title": String,
 })
 
