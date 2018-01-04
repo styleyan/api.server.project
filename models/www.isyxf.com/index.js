@@ -9,6 +9,7 @@ const articleSchema = new Schema({
   "id": String,
   "isShow": Boolean,
   "title": String,
+  "render": String,
 })
 
 module.exports = mongoose.model('Article', articleSchema)
