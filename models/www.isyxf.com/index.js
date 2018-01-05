@@ -6,11 +6,11 @@ const articleSchema = new Schema({
   "classify": Number,
   "content": String,
   "createTime": Date,
-  "id": String,
   "isShow": Boolean,
   "title": String,
   "render": String,
-  "url": String
+  "articleId": String,
+  "preMore": String,
 })
 
 module.exports = mongoose.model('Article', articleSchema)
