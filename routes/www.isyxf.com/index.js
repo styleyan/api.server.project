@@ -86,6 +86,8 @@ module.exports = function (router) {
       result.result = {
         list: docs,
         pageTotal: count,
+        pageActive: data.pageActive,
+        pageSize: data.pageSize,
       }
     } else {
       result.status = 0
