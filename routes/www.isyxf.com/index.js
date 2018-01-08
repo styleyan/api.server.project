@@ -98,14 +98,31 @@ module.exports = function (router) {
     ctx.body = result
   })
 
+  // 上一条，下一条排除的字段
+  const exclude = {
+    _id: false, 
+    __v: false, 
+    preMore: false, 
+    content: false, 
+    render:false,
+    createTime:false,
+    classify:false,
+    isShow: false,
+  }
   // 查询文章详情
   router.post('/api/blog/detail/:articleId', async(ctx) => {
     const data = ctx.params
-    const result = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false, preMore: false}).exec()
+    const article = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false, preMore: false}).exec()
+    const prevTo = await Article.find({'articleId': {'$lt': data.articleId}}, exclude).exec()
+    const nextTo = await Article.find({'articleId': {'$gt': data.articleId}}, exclude).exec()
     ctx.body = {
       status: 1,
       msg: '',
-      result,
+      result: {
+        article,
+        prevTo: prevTo[0] || null,
+        nextTo: nextTo[0] || null,
+      },
     }
   })
 }
