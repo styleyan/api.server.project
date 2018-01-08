@@ -101,7 +101,7 @@ module.exports = function (router) {
   // 查询文章详情
   router.post('/api/blog/detail/:articleId', async(ctx) => {
     const data = ctx.params
-    const result = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false}).exec()
+    const result = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false, preMore: false}).exec()
     ctx.body = {
       status: 1,
       msg: '',
