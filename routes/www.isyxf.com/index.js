@@ -9,6 +9,7 @@ module.exports = function (router) {
   // 增加文章
   router.post('/api/blog/add', async(ctx) => {
     const data = ctx.request.body
+    data.updateTime = new Date()
     const articleData = new Article(data)
     const saveResult = await articleData.save()
     ctx.body = {
@@ -44,6 +45,7 @@ module.exports = function (router) {
   // 更新文章
   router.post('/api/blog/update', async(ctx) => {
     const data = ctx.request.body
+    data.updateTime = new Date()
     const updateResult = await Article.update({articleId: data.articleId}, data)
     let result
     if (updateResult.ok && updateResult.n) {
@@ -81,6 +83,7 @@ module.exports = function (router) {
     if (docs) {
       docs.forEach((item) => {
         item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
+        item.updateTime = moment(item.updateTime).format('YYYY-MM-DD HH:mm:ss')
       })
       result.status = 1
       result.result = {
@@ -112,9 +115,12 @@ module.exports = function (router) {
   // 查询文章详情
   router.post('/api/blog/detail/:articleId', async(ctx) => {
     const data = ctx.params
-    const article = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false, preMore: false}).exec()
+    const article = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false, preMore: false}).lean().exec()
     const prevTo = await Article.find({'articleId': {'$lt': data.articleId}}, exclude).exec()
     const nextTo = await Article.find({'articleId': {'$gt': data.articleId}}, exclude).exec()
+    console.log(article.updateTime)
+    article.updateTime = moment(article.updateTime).format('YYYY-MM-DD HH:mm:ss')
+    article.createTime = moment(article.createTime).format('YYYY-MM-DD HH:mm:ss')
     ctx.body = {
       status: 1,
       msg: '',

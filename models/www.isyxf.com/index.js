@@ -11,6 +11,7 @@ const articleSchema = new Schema({
   "render": String,
   "articleId": String,
   "preMore": String,
+  "updateTime": Date,
 })
 
 module.exports = mongoose.model('Article', articleSchema)
