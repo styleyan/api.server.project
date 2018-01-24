@@ -25,7 +25,7 @@
     "koa-jsonp": "^2.0.2",
     "koa-session2": "^2.2.4",
     "moment": "^2.20.1",
-    "mongoose": "4.10.3",
+    "mongoose": "^5.0.1",
     "silly-datetime": "^0.1.2",
     "uuid": "^3.1.0",
     "ws": "^3.3.3"

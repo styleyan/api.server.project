@@ -12,34 +12,26 @@ module.exports = function (router) {
     data.updateTime = new Date()
     const articleData = new Article(data)
     const saveResult = await articleData.save()
-    ctx.body = {
-      gg: 'yxf',
-      pp: 'wn',
-    }
-  })
-
-  // 删除文章
-  router.post('/api/blog/delete/:articleId', async(ctx) => {
-    const data = ctx.params
-    const removeResult = await Article.remove({articleId: data.articleId})
-    let { result } = removeResult
-    let respon
-    if (result.ok && result.n) {
-      respon = {
+    let result
+    if (saveResult) {
+      result = {
         msg: '',
         code: '',
-        result: {},
+        result: {
+          articleId: saveResult.articleId
+        },
         status: 1
       }
     } else {
-      respon = {
+      result = {
         msg: '服务器错误',
         code: '10007',
-        result: {},
+        result: null,
         status: 0
       }
     }
-    ctx.body = respon
+    console.log('ddddd', result)
+    ctx.body = result
   })
 
   // 更新文章
@@ -63,6 +55,30 @@ module.exports = function (router) {
       }
     }
     ctx.body = result
+  })
+
+  
+  // 删除文章
+  router.post('/api/blog/delete/:articleId', async(ctx) => {
+    const data = ctx.params
+    const removeResult = await Article.remove({articleId: data.articleId})
+    let respon
+    if (removeResult.ok && removeResult.n) {
+      respon = {
+        msg: '',
+        code: '',
+        result: {},
+        status: 1
+      }
+    } else {
+      respon = {
+        msg: '服务器错误',
+        code: '10007',
+        result: {},
+        status: 0
+      }
+    }
+    ctx.body = respon
   })
 
   // 查询文章列表
