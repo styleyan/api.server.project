@@ -23,9 +23,12 @@ const Navs = require('./hao.isyxf.com/www')
 const User = require('./admin.isyxf.com/index')
 // 文章模型
 const Article = require('./www.isyxf.com/index')
+// 文章模型
+const Link = require('./www.isyxf.com/link')
 
 module.exports = {
   Navs,
   User,
   Article,
+  Link,
 }

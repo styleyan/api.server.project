@@ -2,7 +2,6 @@
  * www.isyxf.com
  */
 const { Article } = require('../../models')
-const { createdUuid } = require('../../utils')
 const moment = require('moment')
 
 module.exports = function (router) {
