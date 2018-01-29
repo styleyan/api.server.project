@@ -41,7 +41,7 @@ module.exports = function (router) {
     } else {
       result = {
         code: '1008',
-        msg: 'uuid不才在',
+        msg: 'uuid不存在',
         result: null,
         status: 0,
       }
@@ -51,11 +51,11 @@ module.exports = function (router) {
   })
 
   // 更新友链
-  router.post('/api/blog/delete/link', async(ctx) => {
+  router.post('/api/blog/update/link', async(ctx) => {
     const data = ctx.request.body
-    const removeResult = await Link.update({uuid: data.uuid}, data)
+    const updateResult = await Link.update({uuid: data.uuid}, data)
     let result
-    if (removeResult) {
+    if (updateResult) {
       result = {
         code: '',
         msg: '',
@@ -74,7 +74,7 @@ module.exports = function (router) {
     ctx.body = result
   })
 
-  // 更新友链
+  // 查询友链
   router.post('/api/blog/get/link', async(ctx) => {
     const data = ctx.request.body
     const limit = data.pageSize

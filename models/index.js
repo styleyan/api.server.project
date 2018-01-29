@@ -25,10 +25,12 @@ const User = require('./admin.isyxf.com/index')
 const Article = require('./www.isyxf.com/index')
 // 文章模型
 const Link = require('./www.isyxf.com/link')
+// 专题模型
+const Series = require('./www.isyxf.com/series')
 
 module.exports = {
   Navs,
   User,
   Article,
-  Link,
+  Series,
 }
