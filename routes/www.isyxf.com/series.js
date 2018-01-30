@@ -52,8 +52,10 @@ module.exports = function (router) {
   // 更新专题
   router.post('/api/blog/update/series', async(ctx) => {
     const data = ctx.request.body
-    const updateResult = await Series.update({classify: data.classify}, data)
     let result
+    
+    await Series.remove({})
+    const updateResult = await Series.create(data)
     if (updateResult) {
       result = {
         code: '',

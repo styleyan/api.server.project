@@ -7,7 +7,7 @@ const {  Schema } = mongoose
 
 // 建模
 const seriesSchema = new Schema({
-  "classify": Number,
+  "classify": String,
   "classifyName": String,
   "desc": String,
 })
