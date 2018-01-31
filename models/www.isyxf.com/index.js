@@ -3,7 +3,7 @@ const {Schema} = mongoose
 
 // 建模型
 const articleSchema = new Schema({
-  "classify": Number,
+  "classify": String,
   "content": String,
   "createTime": Date,
   "isShow": Boolean,

@@ -6,7 +6,7 @@ module.exports = function (router) {
     const data = ctx.request.body
     const linkData = new Series(data)
     const saveResult = await linkData.save()
-    let result 
+    let result
     if (saveResult) {
       result = {
         msg: '',
@@ -53,7 +53,6 @@ module.exports = function (router) {
   router.post('/api/blog/update/series', async(ctx) => {
     const data = ctx.request.body
     let result
-    
     await Series.remove({})
     const updateResult = await Series.create(data)
     if (updateResult) {
@@ -78,7 +77,7 @@ module.exports = function (router) {
   // 查询专题
   router.post('/api/blog/get/series', async(ctx) => {
     const data = ctx.request.body
-    const docs = await Series.find({}, {_id: false}).lean().exec()
+    const docs = await Series.find({}, {_id: false, __v: false}).lean().exec()
     let result
     if (docs) {
       result = {

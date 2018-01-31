@@ -1,7 +1,7 @@
 /**
  * www.isyxf.com
  */
-const { Article } = require('../../models')
+const { Article, Series } = require('../../models')
 const moment = require('moment')
 
 module.exports = function (router) {
@@ -56,7 +56,7 @@ module.exports = function (router) {
     ctx.body = result
   })
 
-  
+
   // 删除文章
   router.post('/api/blog/delete/:articleId', async(ctx) => {
     const data = ctx.params
@@ -93,12 +93,17 @@ module.exports = function (router) {
     // TODO: 通过设置find方法第二个参数，排除返回的字段
     const docs = await Article.find({}, {_id: false, __v: false, content: false, render: false}, {skip, limit, sort: {createTime: 'desc'}}).lean().exec()
     const count = await Article.count().exec()
+    const series = await Series.find({}, {_id: false, __v: false}).exec()
     const result = {}
-
+    const tmpSeries = {}
+    series.forEach((obj) => {
+      tmpSeries[obj.classify] = obj.classifyName
+    })
     if (docs) {
       docs.forEach((item) => {
         item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
         item.updateTime = moment(item.updateTime).format('YYYY-MM-DD HH:mm:ss')
+        item['classifyName'] = tmpSeries[item.classify]
       })
       result.status = 1
       result.result = {
@@ -118,10 +123,10 @@ module.exports = function (router) {
 
   // 上一条，下一条排除的字段
   const exclude = {
-    _id: false, 
-    __v: false, 
-    preMore: false, 
-    content: false, 
+    _id: false,
+    __v: false,
+    preMore: false,
+    content: false,
     render:false,
     createTime:false,
     classify:false,
@@ -133,7 +138,6 @@ module.exports = function (router) {
     const article = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false, preMore: false}).lean().exec()
     const prevTo = await Article.find({'articleId': {'$lt': data.articleId}}, exclude).exec()
     const nextTo = await Article.find({'articleId': {'$gt': data.articleId}}, exclude).exec()
-    console.log(article.updateTime)
     article.updateTime = moment(article.updateTime).format('YYYY-MM-DD HH:mm:ss')
     article.createTime = moment(article.createTime).format('YYYY-MM-DD HH:mm:ss')
     ctx.body = {
