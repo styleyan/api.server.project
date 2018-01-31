@@ -5,6 +5,7 @@ module.exports = function (router) {
   // 增加友链
   router.post('/api/blog/add/link', async(ctx) => {
     const data = ctx.request.body
+    data.createTime = new Date()
     const linkData = new Link(data)
     const saveResult = await linkData.save()
     let result
@@ -88,7 +89,7 @@ module.exports = function (router) {
     const docs = await Link.find({}, {}, {skip, limit, sort: {createTime: 'desc'}}).lean().exec()
     const count = await Link.count().exec()
     const result = {}
-    
+
     if (docs) {
       docs.forEach((item) => {
         item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')

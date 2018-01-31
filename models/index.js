@@ -32,5 +32,6 @@ module.exports = {
   Navs,
   User,
   Article,
+  Link,
   Series,
 }
