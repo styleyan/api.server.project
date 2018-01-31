@@ -17,7 +17,7 @@ module.exports = function (router) {
         msg: '',
         code: '',
         result: {
-          articleId: saveResult.articleId
+          uuid: saveResult.uuid
         },
         status: 1
       }
@@ -37,7 +37,7 @@ module.exports = function (router) {
   router.post('/api/blog/update', async(ctx) => {
     const data = ctx.request.body
     data.updateTime = new Date()
-    const updateResult = await Article.update({articleId: data.articleId}, data)
+    const updateResult = await Article.update({uuid: data.uuid}, data)
     let result
     if (updateResult.ok && updateResult.n) {
       result = {
@@ -58,9 +58,9 @@ module.exports = function (router) {
 
 
   // 删除文章
-  router.post('/api/blog/delete/:articleId', async(ctx) => {
+  router.post('/api/blog/delete/:uuid', async(ctx) => {
     const data = ctx.params
-    const removeResult = await Article.remove({articleId: data.articleId})
+    const removeResult = await Article.remove({uuid: data.uuid})
     let respon
     if (removeResult.ok && removeResult.n) {
       respon = {
@@ -133,11 +133,11 @@ module.exports = function (router) {
     isShow: false,
   }
   // 查询文章详情
-  router.post('/api/blog/detail/:articleId', async(ctx) => {
+  router.post('/api/blog/detail/:uuid', async(ctx) => {
     const data = ctx.params
-    const article = await Article.findOne({articleId: data.articleId}, {_id: false, __v: false, preMore: false}).lean().exec()
-    const prevTo = await Article.find({'articleId': {'$lt': data.articleId}}, exclude).exec()
-    const nextTo = await Article.find({'articleId': {'$gt': data.articleId}}, exclude).exec()
+    const article = await Article.findOne({uuid: data.uuid}, {_id: false, __v: false, preMore: false}).lean().exec()
+    const prevTo = await Article.find({'uuid': {'$lt': data.uuid}}, exclude).exec()
+    const nextTo = await Article.find({'uuid': {'$gt': data.uuid}}, exclude).exec()
     article.updateTime = moment(article.updateTime).format('YYYY-MM-DD HH:mm:ss')
     article.createTime = moment(article.createTime).format('YYYY-MM-DD HH:mm:ss')
     ctx.body = {

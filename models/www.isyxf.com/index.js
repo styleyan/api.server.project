@@ -12,6 +12,7 @@ const articleSchema = new Schema({
   "articleId": String,
   "preMore": String,
   "updateTime": Date,
+  "uuid": String,
 })
 
 module.exports = mongoose.model('Article', articleSchema)
