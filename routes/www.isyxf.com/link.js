@@ -28,9 +28,9 @@ module.exports = function (router) {
   })
 
   // 删除友链
-  router.post('/api/blog/delete/link', async(ctx) => {
-    const uuid = ctx.request.body.uuid
-    const removeResult = Link.remove({uuid})
+  router.post('/api/blog/remove/link', async(ctx) => {
+    const { uuid } = ctx.request.body
+    const removeResult = await Link.remove({uuid})
     let result
     if (removeResult) {
       result = {
@@ -42,7 +42,7 @@ module.exports = function (router) {
     } else {
       result = {
         code: '1008',
-        msg: 'uuid不存在',
+        msg: '出错了',
         result: null,
         status: 0,
       }

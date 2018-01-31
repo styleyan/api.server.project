@@ -13,6 +13,7 @@ const linkSchema = new Schema({
   "classify": Number,
   "classifyName": String,
   "desc": String,
+  "uuid": String,
 })
 
 module.exports = mongoose.model('Link', linkSchema)
