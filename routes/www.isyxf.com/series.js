@@ -1,4 +1,4 @@
-const { Series } = require('../../models')
+const { Article, Series } = require('../../models')
 
 module.exports = function (router) {
   // 增加专题
@@ -77,14 +77,26 @@ module.exports = function (router) {
   // 查询专题
   router.post('/api/blog/get/series', async(ctx) => {
     const data = ctx.request.body
-    const docs = await Series.find({}, {_id: false, __v: false}).lean().exec()
+    const seriesList = await Series.find({}, {_id: false, __v: false}).lean().exec()
+    let activeList = null
+    if (data.origin === 'www') {
+      activeList = await Article.find({}, {_id: false, __v: false, content: false, render: false, preMore: false}, {sort: {createTime: 'desc'}}).lean().exec()
+      seriesList.forEach((item) => {
+        item.list = []
+        activeList.forEach((art) => {
+          if (item.classify === art.classify) {
+            item.list.push(art)
+          }
+        })
+      })
+    }
     let result
-    if (docs) {
+    if (seriesList) {
       result = {
         code: '',
         msg: '',
         result: {
-          list: docs,
+          list: seriesList,
         },
         status: 1,
       }

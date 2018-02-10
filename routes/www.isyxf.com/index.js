@@ -150,4 +150,20 @@ module.exports = function (router) {
       },
     }
   })
+
+  // 文章归档测试
+  router.post('/api/blog/archive', async(ctx) => {
+    const docs = await Article.find({}, {classify: false, preMore: false, _id: false, __v: false, content: false, render: false}, {sort: {createTime: 'desc'}}).lean().exec()
+    // article.createTime = moment(article.createTime).format('YYYY-MM')
+    docs.forEach((item) => {
+      console.log(item.createTime, moment(item.createTime).format('YYYY-MM-DD HH:mm:ss'))
+      item.time = moment(item.createTime).format('YYYY-MM')
+    })
+    // console.log(docs)
+    ctx.body = {
+      status: 1,
+      msg: '',
+      result: {},
+    }
+  })
 }
