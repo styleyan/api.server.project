@@ -152,18 +152,31 @@ module.exports = function (router) {
   })
 
   // 文章归档测试
-  router.post('/api/blog/archive', async(ctx) => {
-    const docs = await Article.find({}, {classify: false, preMore: false, _id: false, __v: false, content: false, render: false}, {sort: {createTime: 'desc'}}).lean().exec()
-    // article.createTime = moment(article.createTime).format('YYYY-MM')
-    docs.forEach((item) => {
-      console.log(item.createTime, moment(item.createTime).format('YYYY-MM-DD HH:mm:ss'))
-      item.time = moment(item.createTime).format('YYYY-MM')
+  router.post('/api/blog/get/archive', async(ctx) => {
+    const docs = await Article.find({}, {classify: false, updateTime: false, preMore: false, _id: false, __v: false, content: false, render: false}, {sort: {createTime: 'desc'}}).lean().exec()
+    const arrList = []
+    let num = 0
+    // article.createTime = moment(article.createTime).format('YYYY-MM-DD HH:mm:ss')
+    docs.forEach((item, index) => {
+      const classify = moment(item.createTime).format('YYYY-MM')
+      item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
+      if (!arrList[num]) {
+        arrList.push({
+          classify,
+          list: [],
+        })
+      }
+      arrList[num].list.push(item)
+      const nextDoc = docs[index + 1]
+      if (nextDoc && moment(nextDoc.createTime).format('YYYY-MM') !== classify) {
+        num++
+      }
     })
     // console.log(docs)
     ctx.body = {
       status: 1,
       msg: '',
-      result: {},
+      result: arrList,
     }
   })
 }
