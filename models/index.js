@@ -3,7 +3,7 @@ const {mongoHost, mongoPort} = require('../server.config')
 
 mongoose.Promise = global.Promise
 // 链接数据
-mongoose.connect(`mongodb://${mongoHost}:${mongoPort}/myTest`)
+mongoose.connect(`mongodb://${mongoHost}:${mongoPort}/myblog`)
 // 监听是否链接成功
 mongoose.connection.on('connected', () => {
   console.log('MongoDB connected success')
