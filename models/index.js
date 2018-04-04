@@ -1,9 +1,18 @@
 const mongoose = require('mongoose')
-const {mongoHost, mongoPort} = require('../server.config')
+const { mongo } = require('../server.config')
 
 mongoose.Promise = global.Promise
-// 链接数据
-mongoose.connect(`mongodb://${mongoHost}:${mongoPort}/myblog`)
+
+/**
+ * TODO: mongodb数据库链接有2种
+ * ①、mongoose.connect(`mongodb://${mongo.user}:${mongo.pwd}@${mongo.host}:${mongo.port}/${mongo.db}`) 缺点:密码不能出现@字符
+ * ②、
+ */
+mongoose.connect(`mongodb://${mongo.host}:${mongo.port}/${mongo.db}`, {
+  user: mongo.user,
+  pass: mongo.pwd,
+})
+
 // 监听是否链接成功
 mongoose.connection.on('connected', () => {
   console.log('MongoDB connected success')
