@@ -10,7 +10,7 @@ RUN npm install pm2 -g --registry=https://registry.npm.taobao.org
 RUN mkdir -p /opt/api-server-project
 WORKDIR /opt/api-server-project
 
-# 安装项目依赖包
+# 安装项目依赖包（COPY指令和ADD指令功能和使用方式类似。只是COPY指令不会做自动解压工作。）
 COPY package.json /opt/api-server-project/
 RUN npm install --registry=https://registry.npm.taobao.org
 

@@ -179,4 +179,14 @@ module.exports = function (router) {
       result: arrList,
     }
   })
+
+  router.get('/api/boxshare', async(ctx) => {
+    ctx.body = {
+      code: '',
+      status: 0,
+      data: {
+        text: '魔盒分享',
+      },
+    }
+  })
 }
