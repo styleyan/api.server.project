@@ -185,7 +185,7 @@ module.exports = function (router) {
       code: '',
       status: 0,
       data: {
-        text: '魔盒分享3434',
+        text: '魔盒分享3434111111111',
       },
     }
   })
