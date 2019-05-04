@@ -1,0 +1,6 @@
+debug: false
+
+# loggin.file
+logging:
+  level:
+    root: error

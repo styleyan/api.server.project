@@ -1,0 +1,6 @@
+debug: true
+
+# loggin.file
+logging:
+  level:
+    root: info
