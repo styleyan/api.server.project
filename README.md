@@ -1,6 +1,3 @@
 # api.server.com
 
-## code码对应表
-
-- 10001: 未登录
-- 10002: 账户/密码错误
+博客 api server node 版本
