@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyController {
-
     @RequestMapping("/out")
     public String out() {
         return "success";
