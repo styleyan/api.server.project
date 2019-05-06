@@ -1,2 +1,2 @@
--- 创建数据库
+-- 数据库初始化
 CREATE DATABASE blog;
