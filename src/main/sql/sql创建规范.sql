@@ -8,7 +8,7 @@ CREATE TABLE `box_billing_info` (
 
   `contract_no` varchar(64)  NULL COMMENT '合同编号',
 
-  `product_start_time` timestamp  NULL COMMENT '产品生效时间',
+  `product_start_time` timestamp  NULL COMMENT V'产品生效时间',
 
   `product_end_time` timestamp NULL COMMENT '产品失效时间',
 
