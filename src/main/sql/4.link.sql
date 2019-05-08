@@ -8,6 +8,6 @@ CREATE TABLE link(
    `desc` varchar(240) NOT NULL COMMENT '友链描述',
    `https` int NOT NULL DEFAULT 1 COMMENT '是否是https: 0: 否, 1: 是',
    primary key (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8 COMMENT='友链表';
+) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='友链表';
 
 
