@@ -8,8 +8,8 @@ import java.util.List;
 @Repository("articleDao")
 public interface ArticleDao {
     void insert(Article article);
-    void delete(Integer id);
+    void delete(long id);
     void update(Article article);
-    Article selectById(Integer id);
+    Article selectById(long id);
     List<Article> selectAll();
 }

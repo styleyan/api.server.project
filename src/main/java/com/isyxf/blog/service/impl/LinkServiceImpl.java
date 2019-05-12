@@ -2,9 +2,11 @@ package com.isyxf.blog.service.impl;
 
 import com.isyxf.blog.entity.Link;
 import com.isyxf.blog.service.LinkService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LinkServiceImpl implements LinkService {
     @Override
     public void add(Link link) {
