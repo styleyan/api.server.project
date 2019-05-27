@@ -3,10 +3,20 @@ spring:
     # 获取开发环境中农的配置文件，环境配置文件必须以 application-xxx.yml 的命名格式
     active: dev
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://118.25.49.178:3306/seckill?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8
     username: root
     password: yxf@3302
+
 mybatis:
-  mapper-locations:
-    - classpath:mapper/*.xml
-    - classpath*:com/**/mapper/*.xml
+  mapper-locations: classpath:mapper/*.xml
+
+# pagehelper
+pagehelper:
+  helper-dialect: mysql
+  #  分页参数合理化，默认false禁用 .启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
+  #  用合理化时，如果pageNum<1或pageNum>pages会返回空数据
+  reasonable: true
+  support-methods-arguments: true
+  # 设置为true时，使用RowBounds分页会进行count查询，默认=false
+  row-bounds-with-count: true
