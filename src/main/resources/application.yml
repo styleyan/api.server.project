@@ -4,12 +4,17 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://118.25.49.178:3306/seckill?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8
-    username: root
-    password: yxf@3302
+    url: jdbc:mysql://118.25.49.178:3306/blog?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: yxf
+    password: 3302@yxf
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  # mybatis 配置文件
+  config-location: classpath:mybatis/mybatis-config.xml
+  # dao 映射文件
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  # 配置实体对象离职
+  type-aliases-package: com.isyxf.blog.entity
 
 # pagehelper
 pagehelper:
