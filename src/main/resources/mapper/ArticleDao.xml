@@ -3,8 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
-    <insert id="insert">
-        
+    <resultMap id="articleResultMap" type="Article">
+        <result property="id" column="id" javaType="long"/>
+        <result property="gtmCreate" column="gtm_create" javaType="java.util.Date"/>
+        <result property="gtmModify" column="gtm_modify" javaType="String"/>
+        <result property="classifyId" column="classify_id" javaType="long"/>
+        <result property="title" column="title" javaType="String"/>
+        <result property="desc" column="desc" javaType="String"/>
+        <result property="content" column="content" javaType="String"/>
+        <result property="url" column="url" javaType="String"/>
+        <result property="state" column="state" javaType="Integer"/>
+    </resultMap>
+    <insert id="insert" parameterType="articleResultMap">
+        INSERT INTO
     </insert>
 
     <delete id="delete">
@@ -15,11 +26,11 @@
 
     </update>
 
-    <select id="selectById" parameterType="long" resultMap="Article">
+    <select id="selectById" parameterType="long" resultMap="articleResultMap">
 
     </select>
 
-    <select id="selectAll">
+    <select id="selectAll" resultMap="articleResultMap">
 
     </select>
 </mapper>
