@@ -15,15 +15,14 @@ public class MyController {
     private ArticleService articleService;
 
     @RequestMapping("/out")
-    public String out() {
+    public Article out() {
         Article article = null;
-
         try {
             article= articleService.getById(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String str = "sdfsdf";
-        return "success";
+
+        return article;
     }
 }
