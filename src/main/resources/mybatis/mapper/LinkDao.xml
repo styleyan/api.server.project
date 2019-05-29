@@ -15,7 +15,7 @@
 
     </update>
 
-    <select id="selectById" parameterType="long" resultMap="Article">
+    <select id="selectById" parameterType="long">
 
     </select>
 

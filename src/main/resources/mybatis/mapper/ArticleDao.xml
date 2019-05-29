@@ -6,7 +6,7 @@
     <resultMap id="articleResultMap" type="com.isyxf.blog.entity.Article">
         <result property="id" column="id" javaType="long"/>
         <result property="gtmCreate" column="gtm_create" javaType="Date"/>
-        <result property="gtmModify" column="gtm_modify" javaType="String"/>
+        <result property="gtmModify" column="gtm_modify" javaType="Date"/>
         <result property="classifyId" column="classify_id" javaType="long"/>
         <result property="title" column="title" javaType="String"/>
         <result property="desc" column="desc" javaType="String"/>
