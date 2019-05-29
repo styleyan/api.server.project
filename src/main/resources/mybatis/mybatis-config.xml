@@ -11,4 +11,9 @@
         <typeAlias type="java.lang.String" alias="String"/>
         <typeAlias alias="Date" type="java.util.Date"/>
     </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
 </configuration>

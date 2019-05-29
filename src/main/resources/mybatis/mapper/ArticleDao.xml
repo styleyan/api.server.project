@@ -18,8 +18,8 @@
 
     </insert>
 
-    <delete id="delete">
-
+    <delete id="delete" parameterType="long">
+      DELETE FROM article WHERE id=#{id}
     </delete>
 
     <update id="update">
@@ -31,6 +31,6 @@
     </select>
 
     <select id="selectAll" resultMap="articleResultMap">
-
+      SELECT * FROM article order by gmt_create
     </select>
 </mapper>

@@ -9,30 +9,63 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/my")
+@RequestMapping("/api/article")
 public class MyController {
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping(value = "/out/{id}", method = RequestMethod.GET)
-    public GlobalResult out(@PathVariable("id") Integer id) {
+    /**
+     * 查询文章列表
+     * @return List<Article> 返回文章列表
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public GlobalResult list() {
+        List<Article> list = articleService.getAll();
+        GlobalResult<List<Article>> globalResult = new GlobalResult<List<Article>>(true, list);
+
+        return globalResult;
+    }
+
+    /**
+     * 查询文章信息
+     * @param id 文章id
+     * @return 文章实体对象
+     */
+    @RequestMapping(value = "/{id}/detail", method = RequestMethod.GET)
+    public GlobalResult detail(@PathVariable("id") Integer id) {
         GlobalResult<Article> result;
 
         try {
             Article article1 = articleService.getById(id);
             result = new GlobalResult<Article>(true, article1);
-
-            if (result == null) {
-                throw new Exception("查询结果为空");
-            }
         } catch (Exception e) {
             e.printStackTrace();
             result = new GlobalResult<Article>(false, e.getMessage(), 2003);
         }
 
         return result;
+    }
+
+
+    /**
+     * 删除文章
+     */
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+    public GlobalResult remove(@PathVariable("id") long id) {
+        GlobalResult globalResult;
+
+        try {
+            articleService.remove(id);
+            globalResult = new GlobalResult(true, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            globalResult = new GlobalResult(false, e.getMessage());
+        }
+
+        return globalResult;
     }
 }

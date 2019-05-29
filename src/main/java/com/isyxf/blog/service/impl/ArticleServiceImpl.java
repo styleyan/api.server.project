@@ -19,8 +19,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void remove(Integer id) {
-
+    public void remove(long id) {
+        articleDao.delete(id);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getAll() {
-        return null;
+        return articleDao.selectAll();
     }
 }
