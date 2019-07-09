@@ -3,13 +3,20 @@ package com.isyxf.blog.service.impl;
 import com.isyxf.blog.dao.ArticleDao;
 import com.isyxf.blog.entity.Article;
 import com.isyxf.blog.service.ArticleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Y.jer
+ */
 @Service
 public class ArticleServiceImpl implements ArticleService {
+    private final static Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
+
     @Autowired
     private ArticleDao articleDao;
 
@@ -19,7 +26,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void remove(long id) {
+    public void remove(int id) {
         articleDao.delete(id);
     }
 
@@ -35,6 +42,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getAll() {
-        return articleDao.selectAll();
+        return articleDao.selectPage(1, 10);
     }
 }

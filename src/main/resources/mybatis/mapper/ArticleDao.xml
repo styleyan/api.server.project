@@ -23,14 +23,14 @@
     </delete>
 
     <update id="update">
-
+      UPDATE article SET () VALUES () WHERE `id`=2;
     </update>
 
-    <select id="selectById" parameterType="long" resultMap="articleResultMap">
+    <select id="selectById" parameterType="int" resultMap="articleResultMap">
       SELECT * FROM article WHERE id=#{id}
     </select>
 
-    <select id="selectAll" resultMap="articleResultMap">
+    <select id="selectPage" resultMap="articleResultMap">
       SELECT * FROM article order by gmt_create
     </select>
 </mapper>
