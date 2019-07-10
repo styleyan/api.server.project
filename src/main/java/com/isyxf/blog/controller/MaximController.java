@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 
 /**
  * @author Y.jer
+ *
+ * 箴言请求列表
  */
 @RestController
 @RequestMapping(value = "/api/maxim")

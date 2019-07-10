@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isyxf.blog.dao.MaximDao">
+    <resultMap id="maximResultMap" type="com.isyxf.blog.entity.Maxim">
+        <result property="id" column="id" javaType="int"/>
+        <result property="status" column="status" javaType="int"/>
+        <result property="gmtCreate" column="gmt_create" javaType="Date"/>
+        <result property="gmtModify" column="gmt_modify" javaType="Date"/>
+        <result property="context" column="context" javaType="String"/>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO blog_maxim (`context` )
+        VALUES (#{context});
+    </insert>
+
+    <delete id="delete" parameterType="int">
+      DELETE FROM blog_maxim WHERE id=#{id};
+    </delete>
+
+    <select id="selectAll" resultType="com.isyxf.blog.entity.Maxim" resultMap="maximResultMap">
+      SELECT * FROM blog_maxim;
+    </select>
+</mapper>

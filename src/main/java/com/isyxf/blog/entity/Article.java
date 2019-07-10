@@ -14,12 +14,12 @@ import java.util.Date;
 @ToString
 public class Article {
     private int id;
-    private Date gtmCreate;
-    private Date gtmModify;
     private int classifyId;
     private String title;
     private String desc;
     private String content;
     private String url;
     private Integer state;
+    private Date gtmCreate;
+    private Date gtmModify;
 }

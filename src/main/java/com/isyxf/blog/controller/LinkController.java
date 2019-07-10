@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 
 /**
  * @author Y.jer
+ *
+ * 友情链接请求列表
  */
 @RestController
 @RequestMapping(value = "/api/link")

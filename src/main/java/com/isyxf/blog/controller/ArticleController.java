@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 
 /**
  * @author Y.jer
+ *
+ * 文章请求列表
  */
 @RestController
 @RequestMapping("/api/article")

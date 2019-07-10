@@ -15,8 +15,8 @@ import java.util.Date;
 @ToString
 public class Maxim {
     private int id;
-    private Date gmtCreate;
-    private Date gmtModify;
     private String context;
     private int status;
+    private Date gmtCreate;
+    private Date gmtModify;
 }
