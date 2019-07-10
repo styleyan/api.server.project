@@ -1,9 +1,9 @@
 package com.isyxf.blog.service.impl;
 
-import com.isyxf.blog.dao.MaximDao;
+import com.isyxf.blog.dao.BooksDao;
 import com.isyxf.blog.dto.Result;
-import com.isyxf.blog.entity.Maxim;
-import com.isyxf.blog.service.MaximService;
+import com.isyxf.blog.entity.Books;
+import com.isyxf.blog.service.BooksService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,59 +15,53 @@ import java.util.List;
  * 箴言
  */
 @Service
-public class MaximServiceImpl implements MaximService {
-
+public class BooksServiceImpl implements BooksService {
     @Resource
-    private MaximDao maximDao;
+    private BooksDao booksDao;
 
     /**
-     * 添加箴言
-     * @param maxim
+     * 添加书单
+     * @param books
      * @return
      */
     @Override
-    public Result add(Maxim maxim) {
-        try {
-            maximDao.insert(maxim);
+    public Result add(Books books) {
+        try{
+            booksDao.insert(books);
             return Result.success();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return Result.failure(2003, "添加失败");
+            return Result.failure(2003, "添加异常");
         }
     }
 
     /**
-     * 删除箴言
+     * 删除书单
      * @param id
      * @return
      */
     @Override
     public Result remove(Integer id) {
         try {
-            maximDao.delete(id);
+            booksDao.delete(id);
             return Result.success();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return Result.failure(2003, "删除失败");
+            return Result.failure(2003, "删除异常");
         }
     }
 
-    /**
-     * 获取所有箴言
-     * @return
-     */
     @Override
     public Result queryAll() {
         try {
-            List<Maxim> list = maximDao.selectAll();
-
+            List<Books> list = booksDao.selectAll();
             if (list == null) {
                 list = new ArrayList<>();
             }
             return Result.success(list);
         }catch (Exception e) {
             e.printStackTrace();
-            return Result.failure(2003, "失败");
+            return Result.failure(2003, "查询失败");
         }
     }
 }

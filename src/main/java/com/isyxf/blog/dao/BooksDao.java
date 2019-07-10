@@ -11,20 +11,20 @@ import java.util.List;
  */
 public interface BooksDao {
     /**
-     * 查询所有箴言
+     * 查询所有书单
      * @return
      */
     List<Books> selectAll();
 
     /**
-     * 添加箴言
+     * 添加书单
      * @param books
      * @return
      */
     int insert(Books books);
 
     /**
-     * 删除箴言
+     * 删除书单
      * @param id
      * @return
      */
