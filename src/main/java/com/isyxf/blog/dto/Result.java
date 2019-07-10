@@ -31,7 +31,7 @@ public class Result implements Serializable {
     /**
      * 返回数据
      */
-    private Object data;
+    private Object result;
 
     public Result(){}
 
@@ -42,7 +42,7 @@ public class Result implements Serializable {
     public static Result success() {
         Result result = new Result();
         result.setStatus(1);
-        result.setData(new HashMap(0));
+        result.setResult(new HashMap(0));
         return result;
     }
 
@@ -54,7 +54,7 @@ public class Result implements Serializable {
         Result result = new Result();
         result.setStatus(1);
         result.setCode(code);
-        result.setData(data);
+        result.setResult(data);
         return result;
     }
 
@@ -66,7 +66,7 @@ public class Result implements Serializable {
     public static Result success(Object data) {
         Result result = new Result();
         result.setStatus(1);
-        result.setData(data);
+        result.setResult(data);
 
         return result;
     }

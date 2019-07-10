@@ -6,14 +6,17 @@ import lombok.ToString;
 
 import java.util.Date;
 
+/**
+ * @author Y.jer
+ */
 @Setter
 @Getter
 @ToString
 public class Article {
-    private long id;
+    private int id;
     private Date gtmCreate;
     private Date gtmModify;
-    private long classifyId;
+    private int classifyId;
     private String title;
     private String desc;
     private String content;

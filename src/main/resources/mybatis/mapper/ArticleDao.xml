@@ -4,26 +4,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
     <resultMap id="articleResultMap" type="com.isyxf.blog.entity.Article">
-        <result property="id" column="id" javaType="long"/>
-        <result property="gtmCreate" column="gtm_create" javaType="Date"/>
-        <result property="gtmModify" column="gtm_modify" javaType="Date"/>
-        <result property="classifyId" column="classify_id" javaType="long"/>
+        <result property="classifyId" column="classify_id" javaType="Integer"/>
         <result property="title" column="title" javaType="String"/>
         <result property="desc" column="desc" javaType="String"/>
         <result property="content" column="content" javaType="String"/>
         <result property="url" column="url" javaType="String"/>
         <result property="state" column="state" javaType="Integer"/>
+        <result property="id" column="id" javaType="int"/>
+        <result property="gtmCreate" column="gtm_create" javaType="Date"/>
+        <result property="gtmModify" column="gtm_modify" javaType="Date"/>
     </resultMap>
     <insert id="insert">
-
+      INSERT INTO article (`classify_id`, `title`, `desc`, `content`, `url`, `state`)
+      VALUES (#{classifyId}, #{title}, #{desc}, #{content}, #{url}, #{state});
     </insert>
 
-    <delete id="delete" parameterType="long">
+    <delete id="delete" parameterType="int">
       DELETE FROM article WHERE id=#{id}
     </delete>
 
     <update id="update">
-      UPDATE article SET () VALUES () WHERE `id`=2;
+      UPDATE article
+      <set>
+          <if test="classifyId != null">
+              classify_id = #{classifyId},
+          </if>
+          <if test="title != null">
+              `title` = #{title},
+          </if>
+          <if test="desc != null">
+              `desc` = #{desc},
+          </if>
+          <if test="content != null">
+              `content` = #{content},
+          </if>
+          <if test="url != null">
+              `url` = #{url},
+          </if>
+          <if test="state != null">
+              `state` = #{state}
+          </if>
+      </set>
+      WHERE id=#{id};
     </update>
 
     <select id="selectById" parameterType="int" resultMap="articleResultMap">

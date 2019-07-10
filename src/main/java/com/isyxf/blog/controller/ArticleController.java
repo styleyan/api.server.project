@@ -6,7 +6,6 @@ import com.isyxf.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * @author Y.jer
@@ -22,39 +21,28 @@ public class ArticleController {
      * JSON字符串中的key必须对应user中的属性名，否则是请求不过去的。
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
-    public void add(@RequestBody Article article) {
-        System.out.println(article);
+    public Result add(@RequestBody Article article) {
+        return articleService.add(article);
+    }
+
+    /**
+     * 更新文章
+     * @param article
+     * @return
+     */
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, consumes = "application/json")
+    public Result edit(@RequestBody Article article) {
+        return articleService.edit(article);
     }
 
     /**
      * 删除文章
      */
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public Result remove(@PathVariable("id") int id) {
-        Result globalResult;
-
-        try {
-            articleService.remove(id);
-            globalResult = Result.success();
-        } catch (Exception e) {
-            e.printStackTrace();
-            globalResult = Result.failure(2003, e.getMessage());
-        }
-
-        return globalResult;
+        return articleService.remove(id);
     }
 
-    /**
-     * 查询文章列表
-     * @return List<Article> 返回文章列表
-     */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result list() {
-        List<Article> list = articleService.getAll();
-        Result globalResult = Result.success(list);
-
-        return globalResult;
-    }
 
     /**
      * 查询文章信息
@@ -63,16 +51,15 @@ public class ArticleController {
      */
     @RequestMapping(value = "/{id}/detail", method = RequestMethod.GET)
     public Result detail(@PathVariable("id") int id) {
-        Result result;
+        return articleService.getById(id);
+    }
 
-        try {
-            Article article1 = articleService.getById(id);
-            result = Result.success(article1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = Result.failure(2003, e.getMessage());
-        }
-
-        return result;
+    /**
+     * 查询文章列表
+     * @return List<Article> 返回文章列表
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result list() {
+        return articleService.selectPage();
     }
 }

@@ -6,8 +6,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 文章相关操作
+ * @author Y.jer
+ */
 @Repository("articleDao")
 public interface ArticleDao {
+    /**
+     * 添加文章
+     * @param article
+     */
     void insert(Article article);
 
     /**

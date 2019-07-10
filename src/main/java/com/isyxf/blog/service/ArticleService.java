@@ -1,13 +1,17 @@
 package com.isyxf.blog.service;
 
+import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Article;
 
-import java.util.List;
 
+/**
+ * @author Y.jer
+ * 文章相关操作接口
+ */
 public interface ArticleService {
-    void add(Article article);
-    void remove(int id);
-    void edit(Article article);
-    Article getById(Integer id);
-    List<Article> getAll();
+    Result add(Article article);
+    Result remove(int id);
+    Result edit(Article article);
+    Result getById(Integer id);
+    Result selectPage();
 }
