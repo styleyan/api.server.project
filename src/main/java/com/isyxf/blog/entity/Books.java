@@ -37,9 +37,9 @@ public class Books {
      */
     private int isRead;
     /**
-     * 分类
+     * 标签
      */
-    private int classifyId;
+    private int tagId;
     private Date gmtCreate;
     private Date gmtModify;
 }

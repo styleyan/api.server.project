@@ -10,13 +10,13 @@
         <result property="bookScore" column="book_score" javaType="Float"/>
         <result property="bookReason" column="book_reason" javaType="String"/>
         <result property="bookEvaluate" column="book_evaluate" javaType="String"/>
-        <result property="classifyId" column="classify_id" javaType="int"/>
+        <result property="tagId" column="tag_id" javaType="int"/>
         <result property="gmtCreate" column="gmt_create" javaType="Date"/>
         <result property="gmtModify" column="gmt_modify" javaType="Date"/>
     </resultMap>
     <insert id="insert">
-        INSERT INTO blog_books (`is_read`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `classify_id`)
-        VALUES (#{isRead}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{classifyId});
+        INSERT INTO blog_books (`is_read`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `tag_id`)
+        VALUES (#{isRead}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{tagId});
     </insert>
 
     <delete id="delete" parameterType="int">
