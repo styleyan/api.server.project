@@ -1,4 +1,4 @@
--- 创建文章表
+-- 文章表
 CREATE TABLE article(
   `id` bigint(10) AUTO_INCREMENT,
   `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

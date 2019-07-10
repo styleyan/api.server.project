@@ -1,4 +1,4 @@
--- 创建友链表
+-- 友链表
 CREATE TABLE link(
    `id` bigint(10) unsigned AUTO_INCREMENT,
    `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

@@ -1,4 +1,4 @@
--- 创建专题表
+-- 专题表
 CREATE TABLE classify(
    `id` bigint(10) AUTO_INCREMENT,
    `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
