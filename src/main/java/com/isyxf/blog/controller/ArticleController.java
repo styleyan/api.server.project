@@ -3,8 +3,9 @@ package com.isyxf.blog.controller;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Article;
 import com.isyxf.blog.service.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/article")
 public class ArticleController {
-    @Autowired
+    @Resource
     private ArticleService articleService;
 
     /**

@@ -4,22 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.ClassifyDao">
     <insert id="insert">
-        
+        INSERT INTO classify (`desc`, `title`) VALUES (#{desc}, #{title});
     </insert>
 
     <delete id="delete">
-
+      DELETE FROM classify WHERE id=#{id};
     </delete>
 
     <update id="update">
-
+      UPDATE classify
+      <set>
+          <if test="desc != null">
+              `desc` = #{desc},
+          </if>
+          <if test="title != null">
+              `title` = #{title},
+          </if>
+      </set>
+      WHERE id=#{id};
     </update>
 
-    <select id="selectById" parameterType="long">
-
+    <select id="selectById" parameterType="int" resultType="com.isyxf.blog.entity.Classify">
+      SELECT * FROM classify WHERE id=#{id}
     </select>
 
-    <select id="selectAll">
-
+    <select id="selectAll" resultType="com.isyxf.blog.entity.Classify">
+      SELECT * FROM classify;
     </select>
 </mapper>

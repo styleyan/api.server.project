@@ -6,11 +6,15 @@ import lombok.ToString;
 
 import java.util.Date;
 
+/**
+ * @author Y.jer
+ * 文章分类实体类
+ */
 @Setter
 @Getter
 @ToString
 public class Classify {
-    private long id;
+    private int id;
     private Date gmtCreate;
     private Date gtmModify;
     private String desc;

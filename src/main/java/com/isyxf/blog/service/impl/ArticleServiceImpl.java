@@ -6,9 +6,9 @@ import com.isyxf.blog.entity.Article;
 import com.isyxf.blog.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class ArticleServiceImpl implements ArticleService {
     private final static Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
-    @Autowired
+    @Resource
     private ArticleDao articleDao;
 
     /**
@@ -112,7 +112,7 @@ public class ArticleServiceImpl implements ArticleService {
             return Result.success(map);
         }catch (Exception e) {
             e.printStackTrace();
-            return Result.failure(2003, "查询异常");
+            return Result.failure(2003, e.getMessage());
         }
     }
 }
