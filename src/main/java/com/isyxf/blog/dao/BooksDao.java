@@ -2,6 +2,7 @@ package com.isyxf.blog.dao;
 
 import com.isyxf.blog.entity.Books;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author Y.jer
  * 书单接口
  */
+@Repository("booksDao")
 public interface BooksDao {
     /**
      * 查询所有书单

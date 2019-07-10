@@ -2,6 +2,7 @@ package com.isyxf.blog.dao;
 
 import com.isyxf.blog.entity.Maxim;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author Y.jer
  * 个人箴言接口
  */
+@Repository("maximDao")
 public interface MaximDao {
     /**
      * 查询所有箴言

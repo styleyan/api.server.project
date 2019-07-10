@@ -11,8 +11,8 @@
         <result property="context" column="context" javaType="String"/>
     </resultMap>
     <insert id="insert">
-        INSERT INTO blog_maxim (`context` )
-        VALUES (#{context});
+        INSERT INTO blog_maxim (`context`, `status`)
+        VALUES (#{context}, #{status});
     </insert>
 
     <delete id="delete" parameterType="int">

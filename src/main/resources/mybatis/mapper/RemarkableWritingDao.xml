@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isyxf.blog.dao.RemarkableWritingDao">
+    <resultMap id="remarkableWritingMap" type="com.isyxf.blog.entity.RemarkableWriting">
+        <result property="id" column="id" javaType="int"/>
+        <result property="status" column="status" javaType="int"/>
+        <result property="url" column="url" javaType="String"/>
+        <result property="title" column="title" javaType="String"/>
+        <result property="gmtCreate" column="gmt_create" javaType="Date"/>
+        <result property="gmtModify" column="gmt_modify" javaType="Date"/>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO blog_remarkable_writing (`url`, `title`, `status`)
+        VALUES (#{url}, #{title}, #{status});
+    </insert>
+
+    <delete id="delete" parameterType="int">
+      DELETE FROM blog_remarkable_writing WHERE id=#{id};
+    </delete>
+
+    <select id="selectAll" resultType="com.isyxf.blog.entity.Maxim" resultMap="remarkableWritingMap">
+      SELECT * FROM blog_remarkable_writing;
+    </select>
+</mapper>

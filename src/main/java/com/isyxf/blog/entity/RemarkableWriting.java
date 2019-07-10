@@ -8,15 +8,19 @@ import java.util.Date;
 
 /**
  * @author Y.jer
- * 文章分类实体类
+ * 奇文
  */
 @Setter
 @Getter
 @ToString
-public class Classify {
+public class RemarkableWriting {
     private int id;
-    private String desc;
     private String title;
+    private String url;
+    /**
+     * 是否显示
+     */
+    private int status;
     private Date gmtCreate;
-    private Date gtmModify;
+    private Date gmtModify;
 }
