@@ -3,23 +3,45 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.LinkDao">
+    <resultMap id="linkResultMap" type="com.isyxf.blog.entity.Link">
+        <result property="gmtCreate" column="gmt_create" javaType="Date"></result>
+        <result property="gtmModify" column="gtm_modify" javaType="Date"></result>
+        <result property="desc" column="desc" javaType="String"></result>
+        <result property="id" column="id" javaType="int"></result>
+        <result property="https" column="https" javaType="int"></result>
+        <result property="websiteName" column="website_name" javaType="String"></result>
+        <result property="websiteUrl" column="website_url" javaType="String"></result>
+    </resultMap>
+
     <insert id="insert">
-        
+        INSERT INTO link (`website_name`, `website_url`, `desc`, `https`)
+        VALUES (#{websiteName},#{websiteUrl},#{desc},#{https});
     </insert>
 
-    <delete id="delete">
-
+    <delete id="delete" parameterType="int">
+      DELETE FROM link WHERE id=#{id};
     </delete>
 
     <update id="update">
-
+      UPDATE link
+      <set>
+          <if test="websiteName != null">
+              `website_name` = #{websiteName},
+          </if>
+          <if test="websiteUrl != null">
+              `website_url` = #{websiteUrl},
+          </if>
+          <if test="desc != null">
+              `desc` = #{desc},
+          </if>
+          <if test="https != null">
+              `https` = #{https}
+          </if>
+      </set>
+      WHERE id=#{id};
     </update>
 
-    <select id="selectById" parameterType="long">
-
-    </select>
-
-    <select id="selectAll">
-
+    <select id="selectAll" resultType="com.isyxf.blog.entity.Link" resultMap="linkResultMap">
+      SELECT * FROM link;
     </select>
 </mapper>

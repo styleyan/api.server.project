@@ -6,15 +6,19 @@ import lombok.ToString;
 
 import java.util.Date;
 
+/**
+ * @author Y.jer
+ * 友情链接实体类
+ */
 @Setter
 @Getter
 @ToString
 public class Link {
-    private long id;
+    private int id;
     private Date gmtCreate;
     private Date gtmModify;
     private String websiteName;
     private String websiteUrl;
     private String desc;
-    private String https;
+    private int https;
 }

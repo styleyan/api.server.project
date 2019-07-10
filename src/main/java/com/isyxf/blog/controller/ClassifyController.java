@@ -51,7 +51,7 @@ public class ClassifyController {
      * @return
      */
     @RequestMapping(value = "/{id}/detail", method = RequestMethod.GET)
-    public Result queryDetail(@PathVariable("id") int id) {
+    public Result detail(@PathVariable("id") int id) {
         return classifyService.getById(id);
     }
 

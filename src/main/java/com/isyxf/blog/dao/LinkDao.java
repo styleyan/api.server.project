@@ -5,11 +5,36 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Y.jer
+ * 友链相关接口
+ */
 @Repository("linkDao")
 public interface LinkDao {
-    void insert(Link link);
-    void delete(Integer id);
-    void update(Link link);
-    Link selectById(Integer id);
+    /**
+     * 添加友链
+     * @param link
+     * @return
+     */
+    int insert(Link link);
+
+    /**
+     * 删除友链
+     * @param id
+     * @return
+     */
+    boolean delete(Integer id);
+
+    /**
+     * 更新友链
+     * @param link
+     * @return
+     */
+    boolean update(Link link);
+
+    /**
+     * 查询友链
+     * @return
+     */
     List<Link> selectAll();
 }
