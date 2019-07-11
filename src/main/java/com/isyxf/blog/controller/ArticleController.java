@@ -62,7 +62,7 @@ public class ArticleController {
      * @return List<Article> 返回文章列表
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result list() {
-        return articleService.selectPage();
+    public Result listWithPage(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return articleService.selectWithPage(pageNum, pageSize);
     }
 }

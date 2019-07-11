@@ -1,5 +1,7 @@
 package com.isyxf.blog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.isyxf.blog.dao.ArticleDao;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Article;
@@ -93,23 +95,15 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public Result selectPage() {
+    public Result selectWithPage(int pageNum, int pageSize) {
         try {
-            Map map = new HashMap();
-            List list = articleDao.selectPage(1, 10);
+//            PageInfo<Article> listInfo = new PageInfo<>(articleDao.selectPage());
 
-            // 为空则返回空数组
-            if (list == null) {
-                list = new ArrayList();
-            }
+            PageHelper.startPage(pageNum, pageSize);
+            List list = articleDao.selectPage();
+            PageInfo<Article> listInfo = new PageInfo<>(list);
 
-            map.put("list", list);
-            map.put("total", 200);
-            map.put("pageSize", 10);
-            map.put("currentPage", 1);
-            map.put("totalPage", 20);
-
-            return Result.success(map);
+            return Result.success(listInfo);
         }catch (Exception e) {
             e.printStackTrace();
             return Result.failure(2003, e.getMessage());

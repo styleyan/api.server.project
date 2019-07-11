@@ -39,9 +39,7 @@ public interface ArticleDao {
 
     /**
      * 分页查询
-     * @param pageSize 分页数量
-     * @param currPage 当前页码
      * @return
      */
-    List<Article> selectPage(@Param("pageSize") int pageSize, @Param("currPage") int currPage);
+    List<Article> selectPage();
 }

@@ -33,15 +33,5 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   # dao 映射文件
   mapper-locations: classpath:mybatis/mapper/*.xml
-  # 配置实体对象离职
+  # 配置实体对象映射
   type-aliases-package: com.isyxf.blog.entity
-
-# pagehelper
-pagehelper:
-  helper-dialect: mysql
-  #  分页参数合理化，默认false禁用 .启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
-  #  用合理化时，如果pageNum<1或pageNum>pages会返回空数据
-  reasonable: true
-  support-methods-arguments: true
-  # 设置为true时，使用RowBounds分页会进行count查询，默认=false
-  row-bounds-with-count: true

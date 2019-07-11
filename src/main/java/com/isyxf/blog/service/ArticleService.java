@@ -13,5 +13,5 @@ public interface ArticleService {
     Result remove(int id);
     Result edit(Article article);
     Result getById(Integer id);
-    Result selectPage();
+    Result selectWithPage(int pageNum, int pageSize);
 }
