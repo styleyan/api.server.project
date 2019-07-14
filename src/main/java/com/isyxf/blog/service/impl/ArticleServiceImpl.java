@@ -97,11 +97,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Result selectWithPage(int pageNum, int pageSize) {
         try {
-//            PageInfo<Article> listInfo = new PageInfo<>(articleDao.selectPage());
-
             PageHelper.startPage(pageNum, pageSize);
-            List list = articleDao.selectPage();
-            PageInfo<Article> listInfo = new PageInfo<>(list);
+            PageInfo<Article> listInfo = new PageInfo<>(articleDao.selectPage());
 
             return Result.success(listInfo);
         }catch (Exception e) {
