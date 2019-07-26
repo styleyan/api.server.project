@@ -5,12 +5,15 @@
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
     <resultMap id="articleResultMap" type="com.isyxf.blog.entity.Article">
         <result property="classifyId" column="classify_id" javaType="Integer"/>
-        <result property="gtmCreate" column="gmt_create" javaType="Date"/>
-        <result property="gtmModify" column="gtm_modify" javaType="Date"/>
+        <result property="gmtCreate" column="gmt_create" javaType="Date"/>
+        <result property="gmtModify" column="gmt_modify" javaType="Date"/>
     </resultMap>
+
+    <sql id="fields">classify_id,gmt_create,gmt_modify,id,state,title,url</sql>
+
     <insert id="insert">
-      INSERT INTO article (`classify_id`, `title`, `desc`, `content`, `url`, `state`)
-      VALUES (#{classifyId}, #{title}, #{desc}, #{content}, #{url}, #{state});
+      INSERT INTO article (`classify_id`, `title`, brief, `content`, `url`, `state`)
+      VALUES (#{classifyId}, #{title}, #{brief}, #{content}, #{url}, #{state});
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -26,8 +29,8 @@
           <if test="title != null">
               `title` = #{title},
           </if>
-          <if test="desc != null">
-              `desc` = #{desc},
+          <if test="brief != null">
+              `brief` = #{brief},
           </if>
           <if test="content != null">
               `content` = #{content},
@@ -43,10 +46,10 @@
     </update>
 
     <select id="selectById" parameterType="int" resultMap="articleResultMap">
-      SELECT * FROM article WHERE id=#{id}
+      SELECT <include refid="fields"/>,content FROM article WHERE id=#{id}
     </select>
 
     <select id="selectPage" resultMap="articleResultMap">
-      SELECT * FROM article order by gmt_create
+      SELECT <include refid="fields"/>,brief FROM article ORDER BY gmt_create
     </select>
 </mapper>
