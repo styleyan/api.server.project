@@ -17,11 +17,11 @@ import java.util.Date;
 public class Article {
     private int id;
     private int classifyId;
+    private Integer state;
+    private Date gtmCreate;
+    private Date gtmModify;
     private String title;
     private String desc;
     private String content;
     private String url;
-    private Integer state;
-    private Date gtmCreate;
-    private Date gtmModify;
 }

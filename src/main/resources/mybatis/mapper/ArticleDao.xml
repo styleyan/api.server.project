@@ -5,13 +5,7 @@
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
     <resultMap id="articleResultMap" type="com.isyxf.blog.entity.Article">
         <result property="classifyId" column="classify_id" javaType="Integer"/>
-        <result property="title" column="title" javaType="String"/>
-        <result property="desc" column="desc" javaType="String"/>
-        <result property="content" column="content" javaType="String"/>
-        <result property="url" column="url" javaType="String"/>
-        <result property="state" column="state" javaType="Integer"/>
-        <result property="id" column="id" javaType="int"/>
-        <result property="gtmCreate" column="gtm_create" javaType="Date"/>
+        <result property="gtmCreate" column="gmt_create" javaType="Date"/>
         <result property="gtmModify" column="gtm_modify" javaType="Date"/>
     </resultMap>
     <insert id="insert">

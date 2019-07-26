@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -23,8 +24,10 @@ import java.util.List;
 
 /**
  * @author Y.Jer
- * 使用 fasterJson 过滤null字段
+ * @Create 2019-07-26 13:00
+ * 使用 fasterJson 过滤掉字段 value 是 null, 会返回情况
  */
+@Component
 public class FastJsonHttpMessageConverter implements HttpMessageConverter<Object> {
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
     private final static Logger logger = LoggerFactory.getLogger(FastJsonHttpMessageConverter.class);
