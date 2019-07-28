@@ -6,27 +6,34 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     # 服务器启动后可以通过访问: http://127.0.0.1:8080/druid/index.html，查看druid监控
     druid:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://118.25.49.178:3306/blog?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
-        username: root
-        password: yxf@3307
-        # 配置初始化大小/最小/最大[仅用于测试，生成环境需要修改哦]
-        initial-size: 5
-        min-idle: 5
-        max-active: 20
-        # 获取连接等待超时时间
-        max-wait: 60000
-        # 一个连接在池中最小生存的时间
-        time-between-eviction-runs-millis: 300000
-        # 指定获取连接时连接校验的sql查询语句
-        # validation-query: SELECT 'x'
-        # 验证连接的有效性
-        test-while-idle: true
-        # 获取链接时验证，会影响性能(不建议 true)
-        test-on-borrow: false
-        # 打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
-        pool-prepared-statements: false
-        max-pool-prepared-statement-per-connection-size: 20
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://118.25.49.178:3306/blog?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      username: root
+      password: yxf@3307
+      # 配置初始化大小/最小/最大[仅用于测试，生成环境需要修改哦]
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 获取连接等待超时时间
+      max-wait: 60000
+      # 一个连接在池中最小生存的时间
+      time-between-eviction-runs-millis: 300000
+      # 指定获取连接时连接校验的sql查询语句
+      # validation-query: SELECT 'x'
+      # 验证连接的有效性
+      test-while-idle: true
+      # 获取链接时验证，会影响性能(不建议 true)
+      test-on-borrow: false
+      # 打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  jackson:
+    # 全局配置时间戳返回格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 设置时区
+    time-zone: GMT+8
+    # 全局配置接口不返回值为 null 字段
+    default-property-inclusion: non_null
 
 mybatis:
   # mybatis 配置文件
