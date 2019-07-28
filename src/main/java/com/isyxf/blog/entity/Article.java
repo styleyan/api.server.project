@@ -1,6 +1,5 @@
 package com.isyxf.blog.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +9,6 @@ import java.util.Date;
 /**
  * @author Y.jer
  */
-@Data
 @Setter
 @Getter
 @ToString

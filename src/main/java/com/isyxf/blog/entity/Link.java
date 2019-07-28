@@ -20,5 +20,5 @@ public class Link {
     private String desc;
     private int https;
     private Date gmtCreate;
-    private Date gtmModify;
+    private Date gmtModify;
 }

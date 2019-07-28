@@ -3,17 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.BooksDao">
-    <resultMap id="booksResultMap" type="com.isyxf.blog.entity.Books">
-        <result property="id" column="id" javaType="int"/>
-        <result property="isRead" column="is_read" javaType="int"/>
-        <result property="bookName" column="book_name" javaType="String"/>
-        <result property="bookScore" column="book_score" javaType="Float"/>
-        <result property="bookReason" column="book_reason" javaType="String"/>
-        <result property="bookEvaluate" column="book_evaluate" javaType="String"/>
-        <result property="tagId" column="tag_id" javaType="int"/>
-        <result property="gmtCreate" column="gmt_create" javaType="Date"/>
-        <result property="gmtModify" column="gmt_modify" javaType="Date"/>
-    </resultMap>
     <insert id="insert">
         INSERT INTO blog_books (`is_read`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `tag_id`)
         VALUES (#{isRead}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{tagId});
@@ -23,7 +12,7 @@
       DELETE FROM blog_books WHERE id=#{id};
     </delete>
 
-    <select id="selectAll" resultType="com.isyxf.blog.entity.Books" resultMap="booksResultMap">
+    <select id="selectAll" resultType="com.isyxf.blog.entity.Books">
       SELECT * FROM blog_books;
     </select>
 </mapper>

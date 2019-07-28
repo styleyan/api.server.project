@@ -32,7 +32,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     # 设置时区
     time-zone: GMT+8
-    # 全局配置接口不返回值为 null 字段
+    # 全局配置接口不返回值为 null 字段，也可以通过给实体添加注解:@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
     default-property-inclusion: non_null
 
 mybatis:
