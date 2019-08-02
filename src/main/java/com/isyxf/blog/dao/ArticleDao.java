@@ -42,4 +42,9 @@ public interface ArticleDao {
      * @return
      */
     List<Article> selectPage();
+
+    /**
+     * 归档查询
+     */
+    List<Article> archiveList();
 }

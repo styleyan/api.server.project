@@ -57,7 +57,7 @@ public class ClassifyController {
     }
 
     /**
-     * 查询分类详情
+     * 查询分类列表
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
