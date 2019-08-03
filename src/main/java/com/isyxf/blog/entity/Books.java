@@ -35,7 +35,7 @@ public class Books {
     /**
      * 是否已读, 1:一度, 0: 未读
      */
-    private int isRead;
+    private int progress;
     /**
      * 标签
      */

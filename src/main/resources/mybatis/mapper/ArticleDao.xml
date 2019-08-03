@@ -48,6 +48,6 @@
     </select>
 
     <select id="archiveList" resultType="com.isyxf.blog.entity.Article">
-      SELECT id,title,gmt_create,url FROM article ORDER BY gmt_create DESC;
+      SELECT id,title, classify_id,gmt_create,url FROM article ORDER BY gmt_create DESC;
     </select>
 </mapper>

@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.BooksDao">
     <insert id="insert">
-        INSERT INTO blog_books (`is_read`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `tag_id`)
-        VALUES (#{isRead}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{tagId});
+        INSERT INTO blog_books (`progress`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `tag_id`)
+        VALUES (#{progress}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{tagId});
     </insert>
 
     <delete id="delete" parameterType="int">
