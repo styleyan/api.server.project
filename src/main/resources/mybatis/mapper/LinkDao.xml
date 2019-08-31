@@ -3,17 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.LinkDao">
+    <sql id="field">
+        id,website_name, website_url, `desc`, https, state, gmt_create, gmt_modify
+    </sql>
+
     <insert id="insert">
-        INSERT INTO link (`website_name`, `website_url`, `desc`, `https`)
-        VALUES (#{websiteName},#{websiteUrl},#{desc},#{https});
+        INSERT INTO blog_link (`website_name`, `website_url`, `desc`, `https`, `state`)
+        VALUES (#{websiteName},#{websiteUrl},#{desc},#{https}, #{state});
     </insert>
 
     <delete id="delete" parameterType="int">
-      DELETE FROM link WHERE id=#{id};
+      DELETE FROM blog_link WHERE id=#{id};
     </delete>
 
     <update id="update">
-      UPDATE link
+      UPDATE blog_link
       <set>
           <if test="websiteName != null">
               `website_name` = #{websiteName},
@@ -25,13 +29,18 @@
               `desc` = #{desc},
           </if>
           <if test="https != null">
-              `https` = #{https}
+              `https` = #{https},
+          </if>
+          <if test="state != null">
+              `state` = #{state},
           </if>
       </set>
       WHERE id=#{id};
     </update>
 
     <select id="selectAll" resultType="com.isyxf.blog.entity.Link">
-      SELECT * FROM link;
+      SELECT
+        <include refid="field"/>
+      FROM blog_link;
     </select>
 </mapper>

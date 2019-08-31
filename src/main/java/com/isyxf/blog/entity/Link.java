@@ -15,10 +15,11 @@ import java.util.Date;
 @ToString
 public class Link {
     private int id;
+    private int https;
+    private int state;
     private String websiteName;
     private String websiteUrl;
     private String desc;
-    private int https;
     private Date gmtCreate;
     private Date gmtModify;
 }

@@ -1,5 +1,5 @@
 -- 文章表
-CREATE TABLE article(
+CREATE TABLE `blog_article`(
   `id` bigint(10) AUTO_INCREMENT,
   `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',

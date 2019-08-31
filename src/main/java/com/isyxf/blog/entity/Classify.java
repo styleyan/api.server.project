@@ -15,6 +15,7 @@ import java.util.Date;
 @ToString
 public class Classify {
     private int id;
+    private int state;
     private String desc;
     private String title;
     private Date gmtCreate;

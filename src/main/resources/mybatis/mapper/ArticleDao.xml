@@ -6,16 +6,16 @@
     <sql id="fields">classify_id,gmt_create,gmt_modify,id,state,title,url</sql>
 
     <insert id="insert">
-      INSERT INTO article (`classify_id`, `title`, brief, `content`, `url`, `state`)
+      INSERT INTO blog_article (`classify_id`, `title`, brief, `content`, `url`, `state`)
       VALUES (#{classifyId}, #{title}, #{brief}, #{content}, #{url}, #{state});
     </insert>
 
     <delete id="delete" parameterType="int">
-      DELETE FROM article WHERE id=#{id}
+      DELETE FROM blog_article WHERE id=#{id}
     </delete>
 
     <update id="update">
-      UPDATE article
+      UPDATE blog_article
       <set>
           <if test="classifyId != null">
               classify_id = #{classifyId},
@@ -40,14 +40,14 @@
     </update>
 
     <select id="selectById" parameterType="int" resultType="com.isyxf.blog.entity.Article">
-      SELECT <include refid="fields"/>,content FROM article WHERE id=#{id}
+      SELECT <include refid="fields"/>,content FROM blog_article WHERE id=#{id}
     </select>
 
     <select id="selectPage" resultType="com.isyxf.blog.entity.Article">
-      SELECT <include refid="fields"/>,brief FROM article ORDER BY gmt_create
+      SELECT <include refid="fields"/>,brief FROM blog_article ORDER BY gmt_create
     </select>
 
     <select id="archiveList" resultType="com.isyxf.blog.entity.Article">
-      SELECT id,title, classify_id,gmt_create,url FROM article ORDER BY gmt_create DESC;
+      SELECT id,title, classify_id,gmt_create,url FROM blog_article ORDER BY gmt_create DESC;
     </select>
 </mapper>
