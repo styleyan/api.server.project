@@ -36,6 +36,22 @@ public class BooksServiceImpl implements BooksService {
     }
 
     /**
+     * 更新书单
+     * @param books
+     * @return
+     */
+    @Override
+    public Result update(Books books) {
+        try{
+            booksDao.update(books);
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure(2003, "更新异常");
+        }
+    }
+
+    /**
      * 删除书单
      * @param id
      * @return

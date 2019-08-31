@@ -37,6 +37,20 @@ public class MaximServiceImpl implements MaximService {
     }
 
     /**
+     * 编辑检验
+     */
+    @Override
+    public Result edit(Maxim maxim) {
+        try {
+            maximDao.edit(maxim);
+            return Result.success();
+        }catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure(2003, "添加失败");
+        }
+    }
+
+    /**
      * 删除箴言
      * @param id
      * @return

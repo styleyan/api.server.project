@@ -33,9 +33,14 @@ public class Books {
      */
     private String bookEvaluate;
     /**
-     * 是否已读, 1:一度, 0: 未读
+     * 是否已读, 1:已度, 0: 未读
      */
     private int progress;
+
+    /**
+     * 是否显示
+     */
+    private int state;
     /**
      * 标签
      */

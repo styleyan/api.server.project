@@ -7,6 +7,7 @@ CREATE TABLE `blog_books` (
   `book_score` float NOT NULL  COMMENT '评分',
   `book_reason` varchar(250) NOT NULL  COMMENT '推荐理由',
   `book_evaluate` varchar(250) NOT NULL  COMMENT '评价',
+  `state` int(1) NOT NULL DEFAULT 1 COMMENT '是否显示, 1:显示, 0: 不显示',
   `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)

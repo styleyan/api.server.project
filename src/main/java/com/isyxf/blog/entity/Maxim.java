@@ -16,7 +16,7 @@ import java.util.Date;
 public class Maxim {
     private int id;
     private String context;
-    private int status;
+    private int state;
     private Date gmtCreate;
     private Date gmtModify;
 }

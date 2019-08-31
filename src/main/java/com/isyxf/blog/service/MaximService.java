@@ -16,6 +16,13 @@ public interface MaximService {
     Result add(Maxim maxim);
 
     /**
+     * 编辑箴言
+     * @param maxim
+     * @return
+     */
+    Result edit(Maxim maxim);
+
+    /**
      * 删除箴言
      * @param id
      * @return

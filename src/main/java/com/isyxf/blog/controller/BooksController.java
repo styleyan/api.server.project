@@ -32,6 +32,16 @@ public class BooksController {
     }
 
     /**
+     * 更新书单
+     * @param books
+     * @return
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json")
+    public Result update(@RequestBody Books books) {
+        return booksService.update(books);
+    }
+
+    /**
      * 删除书单
      * @param id
      * @return

@@ -26,6 +26,13 @@ public interface BooksDao {
     int insert(Books books);
 
     /**
+     * 更新书单
+     * @param books
+     * @return
+     */
+    int update(Books books);
+
+    /**
      * 删除书单
      * @param id
      * @return

@@ -16,6 +16,13 @@ public interface BooksService {
     Result add(Books books);
 
     /**
+     * 更新箴言
+     * @param books
+     * @return
+     */
+    Result update(Books books);
+
+    /**
      * 删除箴言
      * @param id
      * @return

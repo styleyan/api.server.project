@@ -4,8 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.BooksDao">
     <insert id="insert">
-        INSERT INTO blog_books (`progress`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `tag_id`)
-        VALUES (#{progress}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{tagId});
+        INSERT INTO blog_books (`progress`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `tag_id`, `state`)
+        VALUES (#{progress}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{tagId}, #{state});
+    </insert>
+
+    <insert id="update">
+        UPDATE blog_books
+        <set>
+            <if test="bookName !=null">
+                `book_name`=#{bookName},
+            </if>
+            <if test="progress !=null">
+                `progress`=#{progress},
+            </if>
+            <if test="bookScore !=null">
+                `book_score`=#{bookScore},
+            </if>
+            <if test="bookReason !=null">
+                `book_reason`=#{bookReason},
+            </if>
+            <if test="bookEvaluate !=null">
+                `book_evaluate`=#{bookEvaluate},
+            </if>
+            <if test="state !=null">
+                `state`=#{state},
+            </if>
+        </set>
+        WHERE id=#{id};
     </insert>
 
     <delete id="delete" parameterType="int">

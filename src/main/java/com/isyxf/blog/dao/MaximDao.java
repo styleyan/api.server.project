@@ -26,6 +26,13 @@ public interface MaximDao {
     int insert(Maxim maxim);
 
     /**
+     * 编辑箴言
+     * @param maxim
+     * @return
+     */
+    boolean edit(Maxim maxim);
+
+    /**
      * 删除箴言
      * @param id
      * @return

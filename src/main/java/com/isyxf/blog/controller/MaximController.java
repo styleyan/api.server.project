@@ -44,6 +44,16 @@ public class MaximController {
     }
 
     /**
+     * 添加箴言
+     * @param maxim
+     * @return
+     */
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, consumes = "application/json")
+    public Result edit(@RequestBody Maxim maxim) {
+        return maximService.edit(maxim);
+    }
+
+    /**
      * 查询所有箴言
      * @return
      */
