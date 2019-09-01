@@ -52,11 +52,11 @@ public class BooksController {
     }
 
     /**
-     * 查询所有书单
+     * 查询书单
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result query() {
-        return booksService.queryAll();
+    public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return booksService.queryList(pageNum, pageSize);
     }
 }

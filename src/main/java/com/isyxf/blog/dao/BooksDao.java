@@ -16,7 +16,7 @@ public interface BooksDao {
      * 查询所有书单
      * @return
      */
-    List<Books> selectAll();
+    List<Books> selectPage();
 
     /**
      * 添加书单

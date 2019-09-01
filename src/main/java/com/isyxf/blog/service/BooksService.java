@@ -31,7 +31,9 @@ public interface BooksService {
 
     /**
      * 获取所有箴言
+     * @param pageNum
+     * @param pageSize
      * @return
      */
-    Result queryAll();
+    Result queryList(int pageNum, int pageSize);
 }

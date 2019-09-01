@@ -2,9 +2,7 @@ package com.isyxf.blog.controller;
 
 
 import com.isyxf.blog.dto.Result;
-import com.isyxf.blog.entity.Link;
 import com.isyxf.blog.entity.Maxim;
-import com.isyxf.blog.service.LinkService;
 import com.isyxf.blog.service.MaximService;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,7 +56,7 @@ public class MaximController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result query() {
-        return maximService.queryAll();
+    public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return maximService.queryList(pageNum, pageSize);
     }
 }

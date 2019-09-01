@@ -33,5 +33,5 @@ public interface MaximService {
      * 获取所有箴言
      * @return
      */
-    Result queryAll();
+    Result queryList(int pageNum, int pageSize);
 }

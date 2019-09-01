@@ -1,5 +1,7 @@
 package com.isyxf.blog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.isyxf.blog.dao.MaximDao;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Maxim;
@@ -7,8 +9,6 @@ import com.isyxf.blog.service.MaximService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Y.jer
@@ -71,14 +71,12 @@ public class MaximServiceImpl implements MaximService {
      * @return
      */
     @Override
-    public Result queryAll() {
+    public Result queryList(int pageNum, int pageSize) {
         try {
-            List<Maxim> list = maximDao.selectAll();
+            PageHelper.startPage(pageNum, pageSize);
+            PageInfo<Maxim> listInfo = new PageInfo<>(maximDao.selectPage());
 
-            if (list == null) {
-                list = new ArrayList<>();
-            }
-            return Result.success(list);
+            return Result.success(listInfo);
         }catch (Exception e) {
             e.printStackTrace();
             return Result.failure(2003, "失败");

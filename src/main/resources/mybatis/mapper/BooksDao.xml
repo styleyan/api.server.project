@@ -40,9 +40,9 @@
       DELETE FROM blog_books WHERE id=#{id};
     </delete>
 
-    <select id="selectAll" resultType="com.isyxf.blog.entity.Books">
+    <select id="selectPage" resultType="com.isyxf.blog.entity.Books">
       SELECT
       <include refid="field"/>
-      FROM blog_books;
+      FROM blog_books ORDER BY gmt_create
     </select>
 </mapper>

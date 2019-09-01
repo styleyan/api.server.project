@@ -16,7 +16,7 @@ public interface MaximDao {
      * 查询所有箴言
      * @return
      */
-    List<Maxim> selectAll();
+    List<Maxim> selectPage();
 
     /**
      * 添加箴言
