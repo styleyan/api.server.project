@@ -13,8 +13,9 @@ import java.util.Date;
 @Getter
 @ToString
 public class Article {
-    private int id;
-    private int classifyId;
+    private Integer id;
+    private Integer classifyId;
+    private String classifyTitle;
     private Integer state;
     private Date gmtCreate;
     private Date gmtModify;

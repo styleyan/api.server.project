@@ -3,8 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
-    <sql id="fields">classify_id,gmt_create,gmt_modify,id,state,title,url</sql>
-
+    <sql id="field">
+        article.id,
+        article.state,
+        article.gmt_create,
+        article.gmt_modify,
+        article.title,
+        article.url,
+        classify.title as classify_title
+        from blog_article as article
+        inner join blog_classify as classify on article.classify_id = classify.id
+    </sql>
     <insert id="insert">
       INSERT INTO blog_article (`classify_id`, `title`, brief, `content`, `url`, `state`)
       VALUES (#{classifyId}, #{title}, #{brief}, #{content}, #{url}, #{state});
@@ -40,14 +49,20 @@
     </update>
 
     <select id="selectById" parameterType="int" resultType="com.isyxf.blog.entity.Article">
-      SELECT <include refid="fields"/>,content FROM blog_article WHERE id=#{id}
+        SELECT
+        article.content,,<include refid="field"/>
+        WHERE article.id=#{id};
     </select>
 
     <select id="selectPage" resultType="com.isyxf.blog.entity.Article">
-      SELECT <include refid="fields"/>,brief FROM blog_article ORDER BY gmt_create
+      SELECT
+        article.brief,<include refid="field"/>
+      ORDER BY gmt_create
     </select>
 
     <select id="archiveList" resultType="com.isyxf.blog.entity.Article">
-      SELECT id,title, classify_id,gmt_create,url FROM blog_article ORDER BY gmt_create DESC;
+      SELECT
+        <include refid="field"/>
+        ORDER BY gmt_create DESC;
     </select>
 </mapper>
