@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isyxf.blog.dao.TagsDao">
+    <sql id="field">
+        id,`name`,gmt_create, gmt_modify
+    </sql>
+    <insert id="insert">
+        INSERT INTO blog_tags (`name`)
+        VALUES (#{name});
+    </insert>
+
+    <insert id="update">
+        UPDATE blog_tags
+        <set>
+            <if test="name !=null">
+                `name`=#{name},
+            </if>
+        </set>
+        WHERE id=#{id};
+    </insert>
+
+    <delete id="delete" parameterType="int">
+      DELETE FROM blog_tags WHERE id=#{id};
+    </delete>
+
+    <select id="selectAll" resultType="com.isyxf.blog.entity.Tag">
+      SELECT
+      <include refid="field"/>
+      FROM blog_tags ORDER BY gmt_create;
+    </select>
+</mapper>

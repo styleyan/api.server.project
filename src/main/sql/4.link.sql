@@ -1,6 +1,6 @@
 -- 友链表
 CREATE TABLE `blog_link`(
-   `id` bigint(10) unsigned AUTO_INCREMENT,
+   `id` int(10) unsigned AUTO_INCREMENT,
    `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
    `website_name` varchar(20) NOT NULL COMMENT '友链名称',

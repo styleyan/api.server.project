@@ -23,4 +23,5 @@ public class Article {
     private String brief;
     private String content;
     private String url;
+    private String tags;
 }

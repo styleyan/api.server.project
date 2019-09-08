@@ -1,6 +1,6 @@
 -- 个人奇文表
 CREATE TABLE `blog_remarkable_writing` (
-  `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `status` int(1) NOT NULL DEFAULT 1 COMMENT '是否显示: 0：隐藏，1：显示',
   `url` varchar(260) NOT NULL  COMMENT 'url 链接地址',
   `title` varchar(120) NOT NULL  COMMENT '链接名称',

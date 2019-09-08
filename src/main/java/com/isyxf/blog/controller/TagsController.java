@@ -2,8 +2,8 @@ package com.isyxf.blog.controller;
 
 
 import com.isyxf.blog.dto.Result;
-import com.isyxf.blog.entity.Books;
-import com.isyxf.blog.service.BooksService;
+import com.isyxf.blog.entity.Tag;
+import com.isyxf.blog.service.TagsService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,30 +15,30 @@ import javax.annotation.Resource;
  * 书单请求列表
  */
 @RestController
-@RequestMapping(value = "/api/books")
-public class BooksController {
+@RequestMapping(value = "/api/tags")
+public class TagsController {
 
     @Resource
-    private BooksService booksService;
+    private TagsService tagsService;
 
     /**
      * 添加书单
-     * @param books
+     * @param tag
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
-    public Result add(@RequestBody Books books) {
-        return booksService.add(books);
+    public Result add(@RequestBody Tag tag) {
+        return tagsService.add(tag);
     }
 
     /**
      * 更新书单
-     * @param books
+     * @param tag
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "application/json")
-    public Result update(@RequestBody Books books) {
-        return booksService.update(books);
+    public Result update(@RequestBody Tag tag) {
+        return tagsService.update(tag);
     }
 
     /**
@@ -48,7 +48,7 @@ public class BooksController {
      */
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST, consumes = "application/json")
     public Result delete(@PathVariable("id") int id) {
-        return booksService.remove(id);
+        return tagsService.remove(id);
     }
 
     /**
@@ -56,10 +56,7 @@ public class BooksController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        System.out.println("eeeeeee");
-
-        System.out.println("fffff");
-        return booksService.queryList(pageNum, pageSize);
+    public Result query() {
+        return tagsService.queryList();
     }
 }
