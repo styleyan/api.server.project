@@ -43,7 +43,7 @@
               `url` = #{url},
           </if>
           <if test="state != null">
-              `state` = #{state}
+              `state` = #{state},
           </if>
           <if test="tags != null">
               `tags` = #{tags}
