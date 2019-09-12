@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.isyxf.blog.dao.ArticleDao;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Article;
+import com.isyxf.blog.service.ArticleMappingTagService;
 import com.isyxf.blog.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Resource
     private ArticleDao articleDao;
+    @Resource
+    private ArticleMappingTagService articleMappingTagService;
 
     /**
      * 添加文章
@@ -30,6 +33,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Result add(Article article) {
         try {
+            articleMappingTagService.delete(article.getId(), 1);
+            articleMappingTagService.insert(article.getId(), article.getTags());
             articleDao.insert(article);
             return Result.success();
         } catch (Exception e) {
@@ -62,6 +67,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Result edit(Article article) {
         try {
+            articleMappingTagService.delete(article.getId(), 1);
+            articleMappingTagService.insert(article.getId(), article.getTags());
             articleDao.update(article);
             return Result.success();
         } catch (Exception e) {

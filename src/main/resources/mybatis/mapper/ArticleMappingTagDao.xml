@@ -9,7 +9,7 @@
     <insert id="insert">
       INSERT INTO blog_article_mapping_tag (`act_id`,`tag_id`) VALUES
       <foreach collection="tagsId" item="tagId" separator="," open="(" close=")">
-          #{id}, #{tagId}
+          (#{id}, #{tagId})
       </foreach>
     </insert>
 
