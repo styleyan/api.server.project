@@ -33,9 +33,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Result add(Article article) {
         try {
+            articleDao.insert(article);
             articleMappingTagService.delete(article.getId(), 1);
             articleMappingTagService.insert(article.getId(), article.getTags());
-            articleDao.insert(article);
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,6 +52,7 @@ public class ArticleServiceImpl implements ArticleService {
     public Result remove(int id) {
         try {
             articleDao.delete(id);
+            articleMappingTagService.delete(id, 1);
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();

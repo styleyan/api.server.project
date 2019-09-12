@@ -16,7 +16,7 @@ public interface ArticleDao {
      * 添加文章
      * @param article
      */
-    void insert(Article article);
+    int insert(Article article);
 
     /**
      * 删除文件

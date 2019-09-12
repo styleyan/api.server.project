@@ -15,7 +15,7 @@
         from blog_article as article
         inner join blog_classify as classify on article.classify_id = classify.id
     </sql>
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO blog_article (`classify_id`, `title`, brief, `content`, `url`, `state`, `tags`)
       VALUES (#{classifyId}, #{title}, #{brief}, #{content}, #{url}, #{state}, #{tags});
     </insert>
