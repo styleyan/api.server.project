@@ -3,13 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
-    <!-- 把标签 id 匹配成 标签名-->
-    <sql id="aaa">
-        select article.id, article.tags,article.content, GROUP_CONCAT(tags.name) as 'tags'
-        from blog_article AS article join blog_tags as tags
-        ON FIND_IN_SET(tags.id, article.tags)
-        GROUP BY article.id
-    </sql>
     <sql id="field">
         article.id,
         article.state,
