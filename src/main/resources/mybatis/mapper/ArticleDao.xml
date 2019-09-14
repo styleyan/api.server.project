@@ -19,7 +19,22 @@
         article.url,
         article.tags,
         classify.title as classify_title
-        from blog_article as article
+        from (
+          select
+             article1.content,
+             article1.id,
+             article1.state,
+             article1.gmt_create,
+             article1.gmt_modify,
+             article1.title,
+             article1.url,
+             article1.brief,
+             article1.classify_id,
+             GROUP_CONCAT(tags.name) as 'tags'
+             from blog_article AS article1 join blog_tags as tags
+             ON FIND_IN_SET(tags.id, article1.tags)
+             GROUP BY article1.id
+        ) as article
         inner join blog_classify as classify on article.classify_id = classify.id
     </sql>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
