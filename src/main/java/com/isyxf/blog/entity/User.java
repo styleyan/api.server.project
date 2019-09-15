@@ -8,14 +8,15 @@ import java.util.Date;
 
 /**
  * @author Y.jer
- * 标签
+ * 用户信息
  */
 @Getter
 @Setter
 @ToString
-public class Tag {
-    private int id;
-    private String name;
+public class User {
+    private Integer id;
+    private String userName;
+    private String password;
     private Date gmtCreate;
     private Date gmtModify;
 }

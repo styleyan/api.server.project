@@ -2,6 +2,7 @@ package com.isyxf.blog.dao;
 
 import com.isyxf.blog.entity.ArticleMappingTag;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @Create 2019-09-09 16:41
  * @Descript 文章标签映射表
  */
+@Repository("articleMappingTagDao")
 public interface ArticleMappingTagDao {
     /**
      * 查询所有标签
