@@ -5,9 +5,9 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const validateRequest = require('./middleware/validate-request')
 const router = require('koa-router')()
-const apis = require('./routes/index')(router)
+
+require('./routes/index')(router)
 
 // 错误处理中间件
 onerror(app)
@@ -30,10 +30,6 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
-
-// 请求登录验证中间件
-app.use(validateRequest())
-
 
 // 路由api
 app.use(router.routes(), router.allowedMethods())
