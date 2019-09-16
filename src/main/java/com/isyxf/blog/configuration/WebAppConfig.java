@@ -1,5 +1,6 @@
-package com.isyxf.blog.global;
+package com.isyxf.blog.configuration;
 
+import com.isyxf.blog.interceptor.LoginHandlerInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,6 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
          * 所有以 api 开头的请求都需要经过 LoginHandler 校验
          * excludePathPatterns("", "", ...): 用于排查部分需要校验的氢气地址, 需要指定请求全路径
          */
-        // TODO: registry.addInterceptor 是可以添加多个拦截的
         registry.addInterceptor(new LoginHandlerInterceptor())
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/api/user/login");

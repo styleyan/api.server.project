@@ -34,6 +34,19 @@ spring:
     time-zone: GMT+8
     # 全局配置接口不返回值为 null 字段，也可以通过给实体添加注解:@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
     default-property-inclusion: non_null
+  session:
+    # session 存储类型
+    store-type: redis
+    # session 超时时间
+    timeout: 2000
+  redis:
+    host: 47.99.247.50
+    port: 6379
+    timeout: 4000
+  security:
+    user:
+      name: user
+      password: yxf233
 
 mybatis:
   # mybatis 配置文件
@@ -43,7 +56,3 @@ mybatis:
   # 配置实体对象映射
   type-aliases-package: com.isyxf.blog.entity
 
-# tomcat相关设置
-server:
-  tomcat:
-    uri-encoding: utf-8

@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(exclude = PageHelperAutoConfiguration.class)
 @MapperScan(value = "com.isyxf.blog.dao")
 public class BlogApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(BlogApplication.class, args);
     }

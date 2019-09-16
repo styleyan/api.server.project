@@ -1,4 +1,4 @@
-package com.isyxf.blog.global;
+package com.isyxf.blog.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
