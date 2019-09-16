@@ -57,9 +57,6 @@ public class BooksController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        System.out.println("eeeeeee");
-
-        System.out.println("fffff");
         return booksService.queryList(pageNum, pageSize);
     }
 }

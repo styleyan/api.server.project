@@ -42,3 +42,8 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   # 配置实体对象映射
   type-aliases-package: com.isyxf.blog.entity
+
+# tomcat相关设置
+server:
+  tomcat:
+    uri-encoding: utf-8
