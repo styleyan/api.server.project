@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping(value = "/api/user")
 public class UsersController {
-
     @Resource
     private UsersService usersService;
 
@@ -32,11 +31,9 @@ public class UsersController {
     public Result add(@RequestBody User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("currentUser") == null) {
-            session.setAttribute("user", "zhangsan");
-            System.out.println("不存在session");
-        } else {
-            System.out.println("存在session");
+        Result result = usersService.findUser(user);
+        if (result.getResult() != null && session.getAttribute("currentUser") == null) {
+            session.setAttribute("currentUser", "zhangsan");
         }
         return usersService.findUser(user);
     }
