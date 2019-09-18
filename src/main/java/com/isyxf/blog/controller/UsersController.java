@@ -4,11 +4,14 @@ package com.isyxf.blog.controller;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.User;
 import com.isyxf.blog.service.UsersService;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -21,20 +24,30 @@ import javax.servlet.http.HttpSession;
 public class UsersController {
     @Resource
     private UsersService usersService;
-
+    @Resource
+    private ValueOperations<String, Object> valueOperations;
     /**
      * 登录
      * @param user
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
-    public Result add(@RequestBody User user, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-
+    public Result add(@RequestBody User user, HttpServletResponse response) {
         Result result = usersService.findUser(user);
-        if (result.getResult() != null && session.getAttribute("currentUser") == null) {
-            session.setAttribute("currentUser", "zhangsan");
+
+        if (result.getCode() != 0) {
+            return result;
         }
-        return usersService.findUser(user);
+
+        String uuid = UUID.randomUUID().toString().replace("-", "").toUpperCase();
+        Cookie cookie = new Cookie("_YXF_TOKEN_", uuid);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(60 * 60 * 24 * 365);
+        response.addCookie(cookie);
+
+        // 设置 redis 缓存
+        valueOperations.set(uuid, "2333", 365, TimeUnit.DAYS);
+        return result;
     }
 }

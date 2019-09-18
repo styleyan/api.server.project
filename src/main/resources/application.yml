@@ -34,19 +34,26 @@ spring:
     time-zone: GMT+8
     # 全局配置接口不返回值为 null 字段，也可以通过给实体添加注解:@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
     default-property-inclusion: non_null
-  session:
-    # session 存储类型
-    store-type: redis
-    # session 超时时间
-    timeout: 2000
   redis:
+    # redis服务器地址
     host: 47.99.247.50
+    # redis端口
     port: 6379
+    # redis连接超时时间
     timeout: 4000
-  security:
-    user:
-      name: user
-      password: yxf233
+    # redis 数据库索引(默认为0)，我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 3
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 4
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+
 
 mybatis:
   # mybatis 配置文件
