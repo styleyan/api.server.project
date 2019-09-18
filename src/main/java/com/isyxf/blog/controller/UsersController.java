@@ -4,6 +4,7 @@ package com.isyxf.blog.controller;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.User;
 import com.isyxf.blog.service.UsersService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +34,12 @@ public class UsersController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
     public Result add(@RequestBody User user, HttpServletResponse response) {
-        Result result = usersService.findUser(user);
 
+        if (StringUtils.isBlank(user.getPassword()) || StringUtils.isBlank(user.getUserName())) {
+            return Result.failure(2003, "账号/密码不能为空");
+        }
+
+        Result result = usersService.findUser(user);
         if (result.getCode() != 0) {
             return result;
         }
