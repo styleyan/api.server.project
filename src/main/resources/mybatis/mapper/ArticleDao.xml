@@ -69,8 +69,9 @@
 
     <select id="selectById" parameterType="int" resultType="com.isyxf.blog.entity.Article">
         SELECT
-        article.content,<include refid="field"/>
-        WHERE article.id=#{id};
+        id,state,title,url,tags,classify_id,content
+        FROM blog_article
+        WHERE id=#{id};
     </select>
 
     <select id="selectPage" resultType="com.isyxf.blog.entity.Article">
