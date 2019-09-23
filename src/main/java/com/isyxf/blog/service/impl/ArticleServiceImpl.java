@@ -36,7 +36,8 @@ public class ArticleServiceImpl implements ArticleService {
             articleDao.insert(article);
             articleMappingTagService.delete(article.getId(), 1);
             articleMappingTagService.insert(article.getId(), article.getTags());
-            return Result.success();
+
+            return Result.success(article.getId());
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure(100, e.getMessage());
