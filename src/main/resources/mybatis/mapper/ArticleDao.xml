@@ -76,7 +76,16 @@
 
     <select id="selectPage" resultType="com.isyxf.blog.entity.Article">
       SELECT
-        article.brief,<include refid="field"/>
+        article.id,
+        article.state,
+        article.gmt_create,
+        article.gmt_modify,
+        article.title,
+        article.url,
+        article.tags,
+        classify.title as classify_title
+      FROM blog_article as article
+      inner join blog_classify as classify on article.classify_id = classify.id
       ORDER BY gmt_create
     </select>
 

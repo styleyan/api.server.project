@@ -3,6 +3,7 @@ package com.isyxf.blog.service.impl;
 import com.isyxf.blog.dao.TagsDao;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Tag;
+import com.isyxf.blog.service.ArticleMappingTagService;
 import com.isyxf.blog.service.TagsService;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,11 @@ import java.util.List;
 public class TagsServiceImpl implements TagsService {
     @Resource
     private TagsDao tagsDao;
+    @Resource
+    private ArticleMappingTagService articleMappingTagService;
 
     /**
-     * 添加书单
+     * 添加标签
      * @param tag
      * @return
      */
@@ -35,7 +38,7 @@ public class TagsServiceImpl implements TagsService {
     }
 
     /**
-     * 更新书单
+     * 更新标签
      * @param tag
      * @return
      */
@@ -51,7 +54,7 @@ public class TagsServiceImpl implements TagsService {
     }
 
     /**
-     * 删除书单
+     * 删除标签
      * @param id
      * @return
      */
@@ -59,6 +62,7 @@ public class TagsServiceImpl implements TagsService {
     public Result remove(Integer id) {
         try {
             tagsDao.delete(id);
+            articleMappingTagService.delete(id, 0);
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +70,10 @@ public class TagsServiceImpl implements TagsService {
         }
     }
 
+    /**
+     * 查询所有标签
+     * @return
+     */
     @Override
     public Result queryList() {
         try {
