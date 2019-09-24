@@ -67,11 +67,37 @@ public class BooksServiceImpl implements BooksService {
         }
     }
 
+    /**
+     * 书单列表
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public Result queryList(int pageNum, int pageSize) {
         try {
             PageHelper.startPage(pageNum, pageSize);
             PageInfo<Books> listInfo = new PageInfo<>(booksDao.selectPage());
+
+            return Result.success(listInfo);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure(2003, "查询失败");
+        }
+    }
+
+    /**
+     * 搜索书单
+     * @param pageNum
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @Override
+    public Result searchList(int pageNum, int pageSize, String name) {
+        try {
+            PageHelper.startPage(pageNum, pageSize);
+            PageInfo<Books> listInfo = new PageInfo<>(booksDao.search(name));
 
             return Result.success(listInfo);
         }catch (Exception e) {

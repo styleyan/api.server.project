@@ -52,11 +52,20 @@ public class MaximController {
     }
 
     /**
-     * 查询所有箴言
+     * 所有箴言
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         return maximService.queryList(pageNum, pageSize);
+    }
+
+    /**
+     * 搜索箴言
+     * @return
+     */
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public Result search(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize, @RequestParam("search") String search) {
+        return maximService.searchList(pageNum, pageSize, search);
     }
 }

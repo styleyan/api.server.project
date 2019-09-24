@@ -34,4 +34,12 @@
       <include refid="field"/>
       FROM blog_maxim ORDER BY gmt_create
     </select>
+
+    <select id="searchPage" resultType="com.isyxf.blog.entity.Maxim">
+      SELECT
+      <include refid="field"/>
+      FROM blog_maxim
+      WHERE `context` LIKE '%${search}%'
+      ORDER BY gmt_create
+    </select>
 </mapper>

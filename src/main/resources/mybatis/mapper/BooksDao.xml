@@ -45,4 +45,12 @@
       <include refid="field"/>
       FROM blog_books ORDER BY gmt_create
     </select>
+
+    <select id="search" parameterType="String" resultType="com.isyxf.blog.entity.Books">
+      SELECT
+      <include refid="field"/>
+      FROM blog_books
+      WHERE book_name LIKE '%${name}%'
+      ORDER BY gmt_create
+    </select>
 </mapper>

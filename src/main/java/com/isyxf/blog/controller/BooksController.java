@@ -59,4 +59,13 @@ public class BooksController {
     public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         return booksService.queryList(pageNum, pageSize);
     }
+
+    /**
+     * 搜索书单
+     * @return
+     */
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize, @RequestParam("search") String search) {
+        return booksService.searchList(pageNum, pageSize, search);
+    }
 }

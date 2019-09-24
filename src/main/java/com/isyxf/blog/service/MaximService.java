@@ -34,4 +34,10 @@ public interface MaximService {
      * @return
      */
     Result queryList(int pageNum, int pageSize);
+
+    /**
+     * 搜索箴言
+     * @return
+     */
+    Result searchList(int pageNum, int pageSize, String search);
 }

@@ -82,4 +82,17 @@ public class MaximServiceImpl implements MaximService {
             return Result.failure(2003, "失败");
         }
     }
+
+    @Override
+    public Result searchList(int pageNum, int pageSize, String search) {
+        try {
+            PageHelper.startPage(pageNum, pageSize);
+            PageInfo<Maxim> listInfo = new PageInfo<>(maximDao.searchPage(search));
+
+            return Result.success(listInfo);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure(2003, "失败");
+        }
+    }
 }

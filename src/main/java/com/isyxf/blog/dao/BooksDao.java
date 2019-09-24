@@ -19,6 +19,11 @@ public interface BooksDao {
     List<Books> selectPage();
 
     /**
+     * 搜索书单
+     */
+    List<Books> search(@Param("name") String name);
+
+    /**
      * 添加书单
      * @param books
      * @return

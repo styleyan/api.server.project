@@ -9,31 +9,39 @@ import com.isyxf.blog.entity.Books;
  */
 public interface BooksService {
     /**
-     * 添加箴言
+     * 添加书单
      * @param books
      * @return
      */
     Result add(Books books);
 
     /**
-     * 更新箴言
+     * 更新书单
      * @param books
      * @return
      */
     Result update(Books books);
 
     /**
-     * 删除箴言
+     * 删除书单
      * @param id
      * @return
      */
     Result remove(Integer id);
 
     /**
-     * 获取所有箴言
+     * 获取书单
      * @param pageNum
      * @param pageSize
      * @return
      */
     Result queryList(int pageNum, int pageSize);
+
+    /**
+     * 搜索书单
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    Result searchList(int pageNum, int pageSize, String name);
 }
