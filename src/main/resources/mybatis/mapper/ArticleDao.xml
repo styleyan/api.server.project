@@ -30,6 +30,19 @@
         ) as article
         inner join blog_classify as classify on article.classify_id = classify.id
     </sql>
+
+    <sql id="pageField">
+        article.id,
+        article.state,
+        article.gmt_create,
+        article.gmt_modify,
+        article.title,
+        article.url,
+        article.tags,
+        classify.title as classify_title
+      FROM blog_article as article, blog_classify as classify
+      WHERE article.classify_id = classify.id
+    </sql>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO blog_article (`classify_id`, `title`, brief, `content`, `url`, `state`, `tags`)
       VALUES (#{classifyId}, #{title}, #{brief}, #{content}, #{url}, #{state}, #{tags});
@@ -74,18 +87,18 @@
         WHERE id=#{id};
     </select>
 
+    <select id="search" parameterType="String" resultType="com.isyxf.blog.entity.Article">
+        SELECT
+        <include refid="pageField"/>
+        <if test="search != '' and search != null">
+          AND article.title like "%${search}%"
+        </if>
+        ORDER BY gmt_create
+    </select>
+
     <select id="selectPage" resultType="com.isyxf.blog.entity.Article">
       SELECT
-        article.id,
-        article.state,
-        article.gmt_create,
-        article.gmt_modify,
-        article.title,
-        article.url,
-        article.tags,
-        classify.title as classify_title
-      FROM blog_article as article
-      inner join blog_classify as classify on article.classify_id = classify.id
+        <include refid="pageField"/>
       ORDER BY gmt_create
     </select>
 

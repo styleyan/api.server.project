@@ -58,11 +58,23 @@ public class ArticleController {
     }
 
     /**
-     * 查询文章列表
+     * 文章列表
      * @return List<Article> 返回文章列表
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result listWithPage(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         return articleService.selectWithPage(pageNum, pageSize);
+    }
+
+    /**
+     * 模糊搜索
+     * @param pageNum
+     * @param pageSize
+     * @param search
+     * @return
+     */
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public Result search(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize, @RequestParam("search") String search){
+        return articleService.search(pageNum, pageSize, search);
     }
 }

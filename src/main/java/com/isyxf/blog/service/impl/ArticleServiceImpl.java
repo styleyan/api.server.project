@@ -111,4 +111,22 @@ public class ArticleServiceImpl implements ArticleService {
             return Result.failure(2003, e.getMessage());
         }
     }
+
+    /**
+     * 模糊搜索
+     * @param search
+     * @return
+     */
+    @Override
+    public Result search( int pageNum, int pageSize, String search) {
+        try {
+            PageHelper.startPage(pageNum, pageSize);
+            PageInfo<Article> listInfo = new PageInfo<>(articleDao.search(search));
+
+            return Result.success(listInfo);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure(2003, e.getMessage());
+        }
+    }
 }
