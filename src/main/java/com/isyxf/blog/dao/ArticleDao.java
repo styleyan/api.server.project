@@ -49,4 +49,10 @@ public interface ArticleDao {
      * @return list
      */
     List<Article> archiveList();
+
+    /**
+     * 文章详情 (client 端调用)
+     * @return
+     */
+    Article selectByUrl(@Param("url") String url);
 }

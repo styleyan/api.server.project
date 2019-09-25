@@ -2,10 +2,7 @@ package com.isyxf.blog.controller;
 
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.service.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -38,6 +35,16 @@ public class ClientController {
     public Result articleList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         return articleService.search(pageNum,pageSize, "");
     }
+
+    /**
+     * 文章详情
+     * @return
+     */
+    @RequestMapping(value = "/article/{url}/detail", method = RequestMethod.GET)
+    public Result articleDetail(@PathVariable("url") String url) {
+        return clientService.articleDetail(url);
+    }
+
 
     /**
      * 文章归档

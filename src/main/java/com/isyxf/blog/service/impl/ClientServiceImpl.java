@@ -32,4 +32,20 @@ public class ClientServiceImpl implements ClientService {
             return Result.failure(2003, "查询异常");
         }
     }
+
+    /**
+     * 文章详情
+     * @param url
+     * @return
+     */
+    @Override
+    public Result articleDetail(String url) {
+        try{
+            Article article = articleDao.selectByUrl(url);
+            return Result.success(article);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure(2003, "查询异常");
+        }
+    }
 }

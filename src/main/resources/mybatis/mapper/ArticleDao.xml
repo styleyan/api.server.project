@@ -60,4 +60,10 @@
         WHERE state = 1
     </select>
 
+    <select id="selectByUrl" resultType="com.isyxf.blog.entity.Article">
+        SELECT id,state,gmt_create,gmt_modify,title,url,tags,classify_id,content
+        FROM blog_article
+        WHERE state = 1 AND url=#{url};
+    </select>
+
 </mapper>
