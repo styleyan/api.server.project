@@ -4,7 +4,7 @@ import com.isyxf.blog.dto.Result;
 
 public interface ClientService {
     /**
-     * 查询文章归档
+     * 文章归档
      * @return
      */
     Result archiveList();

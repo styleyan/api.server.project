@@ -43,4 +43,10 @@ public interface ArticleDao {
      * @return list
      */
     List<Article> search(@Param("search") String search);
+
+    /**
+     * 归档查询（client 端调用)
+     * @return list
+     */
+    List<Article> archiveList();
 }

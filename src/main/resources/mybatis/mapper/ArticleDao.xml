@@ -54,4 +54,10 @@
         WHERE title LIKE '%${search}%'
     </select>
 
+    <select id="archiveList" resultType="com.isyxf.blog.entity.Article">
+        SELECT id,gmt_create,title,url,classify_id
+        FROM blog_article
+        WHERE state = 1
+    </select>
+
 </mapper>

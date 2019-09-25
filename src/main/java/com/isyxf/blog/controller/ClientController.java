@@ -1,10 +1,10 @@
 package com.isyxf.blog.controller;
 
 import com.isyxf.blog.dto.Result;
-import com.isyxf.blog.service.ArticleService;
-import com.isyxf.blog.service.ClientService;
+import com.isyxf.blog.service.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -15,17 +15,67 @@ import javax.annotation.Resource;
  * C端相关查询
  */
 @RestController
-@RequestMapping("/api/client")
+@RequestMapping("/client")
 public class ClientController {
     @Resource
-    private ArticleService archiveList;
+    private ArticleService articleService;
+    @Resource
+    private ClientService clientService;
+    @Resource
+    private MaximService maximService;
+    @Resource
+    private BooksService booksService;
+    @Resource
+    private LinkService linkService;
+    @Resource
+    private ClassifyService classifyService;
 
     /**
-     * 查询归档分类
+     * 文章列表
      * @return
      */
-    @RequestMapping(value = "/archive", method = RequestMethod.GET)
+    @RequestMapping(value = "/article/list", method = RequestMethod.GET)
+    public Result articleList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return articleService.search(pageNum,pageSize, "");
+    }
+
+    /**
+     * 文章归档
+     */
+    @RequestMapping(value = "/archive/list", method = RequestMethod.GET)
     public Result archiveList() {
-        return archiveList.search(1,10, "");
+        return clientService.archiveList();
+    }
+
+    /**
+     * 箴言列表
+     */
+    @RequestMapping(value = "/maxim/list", method = RequestMethod.GET)
+    public Result maximList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return maximService.searchList(pageNum, pageSize, "");
+    }
+
+    /**
+     * 书单
+     */
+    @RequestMapping(value = "/books/list", method = RequestMethod.GET)
+    public Result clientList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return booksService.searchList(pageNum, pageSize, "");
+    }
+
+    /**
+     * 友链
+     */
+    @RequestMapping(value = "/link/list", method = RequestMethod.GET)
+    public Result linkList() {
+        return linkService.getAll();
+    }
+
+    /**
+     * 分类
+     */
+    @RequestMapping(value = "/classify/list", method = RequestMethod.GET)
+    public Result classifyList() {
+        return classifyService.getAll();
     }
 }

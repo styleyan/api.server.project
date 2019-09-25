@@ -24,7 +24,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Result archiveList() {
-        List<Article> list = articleDao.search("");
-        return Result.success(list);
+        try {
+            List<Article> list = articleDao.archiveList();
+            return Result.success(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure(2003, "查询异常");
+        }
     }
 }
