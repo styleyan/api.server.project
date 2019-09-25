@@ -1,6 +1,7 @@
 package com.isyxf.blog.controller;
 
 import com.isyxf.blog.dto.Result;
+import com.isyxf.blog.service.ArticleService;
 import com.isyxf.blog.service.ClientService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
 @RequestMapping("/api/client")
 public class ClientController {
     @Resource
-    private ClientService clientService;
+    private ArticleService archiveList;
 
     /**
      * 查询归档分类
@@ -25,6 +26,6 @@ public class ClientController {
      */
     @RequestMapping(value = "/archive", method = RequestMethod.GET)
     public Result archiveList() {
-        return clientService.archiveList();
+        return archiveList.search(1,10, "");
     }
 }

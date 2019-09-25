@@ -3,15 +3,22 @@ package com.isyxf.blog.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.isyxf.blog.dao.ArticleDao;
+import com.isyxf.blog.dao.ClassifyDao;
+import com.isyxf.blog.dao.TagsDao;
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Article;
 import com.isyxf.blog.service.ArticleMappingTagService;
 import com.isyxf.blog.service.ArticleService;
+import com.isyxf.blog.utils.CommonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Y.jer
@@ -24,6 +31,10 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao;
     @Resource
     private ArticleMappingTagService articleMappingTagService;
+    @Resource
+    private ClassifyDao classifyDao;
+    @Resource
+    private TagsDao tagsDao;
 
     /**
      * 添加文章
@@ -96,23 +107,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * 分页查询
-     * @return
-     */
-    @Override
-    public Result selectWithPage(int pageNum, int pageSize) {
-        try {
-            PageHelper.startPage(pageNum, pageSize);
-            PageInfo<Article> listInfo = new PageInfo<>(articleDao.selectPage());
-
-            return Result.success(listInfo);
-        }catch (Exception e) {
-            e.printStackTrace();
-            return Result.failure(2003, e.getMessage());
-        }
-    }
-
-    /**
      * 模糊搜索
      * @param search
      * @return
@@ -122,6 +116,34 @@ public class ArticleServiceImpl implements ArticleService {
         try {
             PageHelper.startPage(pageNum, pageSize);
             PageInfo<Article> listInfo = new PageInfo<>(articleDao.search(search));
+
+            // 查询标签和分类
+            Map<Integer, String> classifyList= CommonUtils.classifyListToMap(classifyDao.selectAll());
+            Map<Integer, String> tagList = CommonUtils.tagListToMap(tagsDao.selectAll());
+
+            /**
+             * TODO: 需要把【分类、标签】都存到 redis 中
+             */
+            for (int i = 0; i < listInfo.getSize(); i++) {
+                Article article = listInfo.getList().get(i);
+                article.setClassifyTitle(classifyList.get(article.getClassifyId()));
+                article.setClassifyId(null);
+
+                String[] tag = article.getTags().split(",");
+                List<String> stringList = new ArrayList<>();
+
+                for (int j = 0; j < tag.length; j++) {
+                    String curTag = tag[j];
+
+                    if (StringUtils.isNotBlank(curTag)) {
+                        stringList.add(tagList.get(Integer.parseInt(curTag)));
+                    }
+                }
+
+                // 将List 转字符串并加入分隔字符的方法
+                article.setTags(StringUtils.join(stringList.toArray(),","));
+
+            }
 
             return Result.success(listInfo);
         }catch (Exception e) {

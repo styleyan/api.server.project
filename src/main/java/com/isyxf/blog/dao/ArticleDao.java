@@ -38,20 +38,9 @@ public interface ArticleDao {
     Article selectById(@Param("id") int id);
 
     /**
-     * 分页
-     * @return
-     */
-    List<Article> selectPage();
-
-    /**
      * 模糊查询
      * @param search 搜索字符
      * @return list
      */
     List<Article> search(@Param("search") String search);
-
-    /**
-     * 归档查询
-     */
-    List<Article> archiveList();
 }

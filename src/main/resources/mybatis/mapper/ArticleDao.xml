@@ -3,46 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
-    <sql id="field">
-        article.id,
-        article.state,
-        article.gmt_create,
-        article.gmt_modify,
-        article.title,
-        article.url,
-        article.tags,
-        classify.title as classify_title
-        from (
-          select
-             article1.content,
-             article1.id,
-             article1.state,
-             article1.gmt_create,
-             article1.gmt_modify,
-             article1.title,
-             article1.url,
-             article1.brief,
-             article1.classify_id,
-             GROUP_CONCAT(tags.name) as 'tags'
-             from blog_article AS article1 join blog_tags as tags
-             ON FIND_IN_SET(tags.id, article1.tags)
-             GROUP BY article1.id
-        ) as article
-        inner join blog_classify as classify on article.classify_id = classify.id
-    </sql>
 
-    <sql id="pageField">
-        article.id,
-        article.state,
-        article.gmt_create,
-        article.gmt_modify,
-        article.title,
-        article.url,
-        article.tags,
-        classify.title as classify_title
-      FROM blog_article as article, blog_classify as classify
-      WHERE article.classify_id = classify.id
-    </sql>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO blog_article (`classify_id`, `title`, brief, `content`, `url`, `state`, `tags`)
       VALUES (#{classifyId}, #{title}, #{brief}, #{content}, #{url}, #{state}, #{tags});
@@ -88,23 +49,9 @@
     </select>
 
     <select id="search" parameterType="String" resultType="com.isyxf.blog.entity.Article">
-        SELECT
-        <include refid="pageField"/>
-        <if test="search != '' and search != null">
-          AND article.title like "%${search}%"
-        </if>
-        ORDER BY gmt_create
+        SELECT id,state,gmt_create,gmt_modify,title,url,tags,classify_id,brief
+        FROM blog_article
+        WHERE title LIKE '%${search}%'
     </select>
 
-    <select id="selectPage" resultType="com.isyxf.blog.entity.Article">
-      SELECT
-        <include refid="pageField"/>
-      ORDER BY gmt_create
-    </select>
-
-    <select id="archiveList" resultType="com.isyxf.blog.entity.Article">
-      SELECT
-        <include refid="field"/>
-        ORDER BY gmt_create DESC;
-    </select>
 </mapper>

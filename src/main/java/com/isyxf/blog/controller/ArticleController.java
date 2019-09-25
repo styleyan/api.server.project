@@ -58,15 +58,6 @@ public class ArticleController {
     }
 
     /**
-     * 文章列表
-     * @return List<Article> 返回文章列表
-     */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result listWithPage(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        return articleService.selectWithPage(pageNum, pageSize);
-    }
-
-    /**
      * 模糊搜索
      * @param pageNum
      * @param pageSize
