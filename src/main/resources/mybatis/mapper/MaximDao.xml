@@ -39,7 +39,14 @@
       SELECT
       <include refid="field"/>
       FROM blog_maxim
-      WHERE `context` LIKE '%${search}%'
+      <where>
+          <if test="search != null">
+              `context` LIKE '%${search}%'
+          </if>
+          <if test="state != -1">
+              AND state = #{state}
+          </if>
+      </where>
       ORDER BY gmt_create
     </select>
 </mapper>

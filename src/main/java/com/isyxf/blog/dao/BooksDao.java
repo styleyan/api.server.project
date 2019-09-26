@@ -21,7 +21,7 @@ public interface BooksDao {
     /**
      * 搜索书单
      */
-    List<Books> search(@Param("name") String name);
+    List<Books> search(@Param("name") String name, Integer state);
 
     /**
      * 添加书单

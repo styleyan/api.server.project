@@ -22,7 +22,7 @@ public interface MaximDao {
      * 查询所有箴言
      * @return
      */
-    List<Maxim> searchPage(@Param("search") String search);
+    List<Maxim> searchPage(@Param("search") String search, @Param("state") Integer state);
 
     /**
      * 添加箴言

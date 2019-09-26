@@ -34,5 +34,5 @@ public interface LinkService {
      * 获取所有友链
      * @return
      */
-    Result getAll();
+    Result getAll(Integer state);
 }

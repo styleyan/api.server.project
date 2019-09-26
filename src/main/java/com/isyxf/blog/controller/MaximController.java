@@ -66,6 +66,6 @@ public class MaximController {
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public Result search(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize, @RequestParam("search") String search) {
-        return maximService.searchList(pageNum, pageSize, search);
+        return maximService.searchList(pageNum, pageSize, search, -1);
     }
 }

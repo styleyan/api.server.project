@@ -57,6 +57,6 @@ public class LinkController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result query() {
-        return linkService.getAll();
+        return linkService.getAll(-1);
     }
 }

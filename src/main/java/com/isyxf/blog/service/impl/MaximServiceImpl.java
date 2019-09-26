@@ -84,10 +84,10 @@ public class MaximServiceImpl implements MaximService {
     }
 
     @Override
-    public Result searchList(int pageNum, int pageSize, String search) {
+    public Result searchList(int pageNum, int pageSize, String search, Integer state) {
         try {
             PageHelper.startPage(pageNum, pageSize);
-            PageInfo<Maxim> listInfo = new PageInfo<>(maximDao.searchPage(search));
+            PageInfo<Maxim> listInfo = new PageInfo<>(maximDao.searchPage(search, state));
 
             return Result.success(listInfo);
         }catch (Exception e) {

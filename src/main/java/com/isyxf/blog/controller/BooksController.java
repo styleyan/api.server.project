@@ -66,6 +66,6 @@ public class BooksController {
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public Result query(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize, @RequestParam("search") String search) {
-        return booksService.searchList(pageNum, pageSize, search);
+        return booksService.searchList(pageNum, pageSize, search, -1);
     }
 }

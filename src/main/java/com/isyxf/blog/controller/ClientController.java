@@ -59,7 +59,7 @@ public class ClientController {
      */
     @RequestMapping(value = "/maxim/list", method = RequestMethod.GET)
     public Result maximList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        return maximService.searchList(pageNum, pageSize, "");
+        return maximService.searchList(pageNum, pageSize, "", 1);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ClientController {
      */
     @RequestMapping(value = "/books/list", method = RequestMethod.GET)
     public Result clientList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        return booksService.searchList(pageNum, pageSize, "");
+        return booksService.searchList(pageNum, pageSize, "", 1);
     }
 
     /**
@@ -75,7 +75,7 @@ public class ClientController {
      */
     @RequestMapping(value = "/link/list", method = RequestMethod.GET)
     public Result linkList() {
-        return linkService.getAll();
+        return linkService.getAll(1);
     }
 
     /**

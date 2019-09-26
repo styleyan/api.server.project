@@ -1,6 +1,7 @@
 package com.isyxf.blog.dao;
 
 import com.isyxf.blog.entity.Link;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,5 +37,5 @@ public interface LinkDao {
      * 查询友链
      * @return
      */
-    List<Link> selectAll();
+    List<Link> selectAll(@Param("state") Integer state);
 }

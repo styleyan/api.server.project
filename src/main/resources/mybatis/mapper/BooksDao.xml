@@ -50,7 +50,14 @@
       SELECT
       <include refid="field"/>
       FROM blog_books
-      WHERE book_name LIKE '%${name}%'
+      <where>
+          <if test="name != null">
+              book_name LIKE '%${name}%'
+          </if>
+          <if test="state != -1">
+              AND state = #{state}
+          </if>
+      </where>
       ORDER BY gmt_create
     </select>
 </mapper>

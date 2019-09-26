@@ -43,5 +43,5 @@ public interface BooksService {
      * @param pageSize
      * @return
      */
-    Result searchList(int pageNum, int pageSize, String name);
+    Result searchList(int pageNum, int pageSize, String name, Integer state);
 }

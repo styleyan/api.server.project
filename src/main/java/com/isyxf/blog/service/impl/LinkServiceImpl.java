@@ -71,9 +71,9 @@ public class LinkServiceImpl implements LinkService {
      * @return
      */
     @Override
-    public Result getAll() {
+    public Result getAll(Integer state) {
         try {
-            List<Link> links = linkDao.selectAll();
+            List<Link> links = linkDao.selectAll(state);
             return Result.success(links);
         } catch (Exception e) {
             e.printStackTrace();

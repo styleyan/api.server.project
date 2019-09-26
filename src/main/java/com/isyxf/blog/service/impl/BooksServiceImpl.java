@@ -94,10 +94,10 @@ public class BooksServiceImpl implements BooksService {
      * @return
      */
     @Override
-    public Result searchList(int pageNum, int pageSize, String name) {
+    public Result searchList(int pageNum, int pageSize, String name, Integer state) {
         try {
             PageHelper.startPage(pageNum, pageSize);
-            PageInfo<Books> listInfo = new PageInfo<>(booksDao.search(name));
+            PageInfo<Books> listInfo = new PageInfo<>(booksDao.search(name, state));
 
             return Result.success(listInfo);
         }catch (Exception e) {

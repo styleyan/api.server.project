@@ -39,5 +39,5 @@ public interface MaximService {
      * 搜索箴言
      * @return
      */
-    Result searchList(int pageNum, int pageSize, String search);
+    Result searchList(int pageNum, int pageSize, String search, Integer state);
 }
