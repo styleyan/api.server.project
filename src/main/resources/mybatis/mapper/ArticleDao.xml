@@ -73,4 +73,16 @@
         WHERE state = 1 AND url=#{url};
     </select>
 
+    <select id="selectNextById" resultType="com.isyxf.blog.entity.Article">
+        SELECT title,url
+        FROM blog_article
+        WHERE state = 1 AND id = (select min(id) from blog_article where id > #{id} AND state = 1);
+    </select>
+
+    <select id="selectPrevById" resultType="com.isyxf.blog.entity.Article">
+        SELECT title,url
+        FROM blog_article
+        WHERE id = (select max(id) from blog_article where id &lt; #{id} AND state = 1);
+    </select>
+
 </mapper>

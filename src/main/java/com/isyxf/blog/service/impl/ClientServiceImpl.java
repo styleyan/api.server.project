@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,9 @@ public class ClientServiceImpl implements ClientService {
     public Result articleDetail(String url) {
         try{
             Article article = articleDao.selectByUrl(url);
+            Article prevArticle = articleDao.selectPrevById(article.getId());
+            Article nextArticle = articleDao.selectNextById(article.getId());
+
             Map<Integer, String> tagList = CommonUtils.tagListToMap(tagsDao.selectAll());
 
             String[] tags = article.getTags().split(",");
@@ -65,7 +69,13 @@ public class ClientServiceImpl implements ClientService {
             // 将List 转字符串并加入分隔字符的方法
             article.setTags(StringUtils.join(stringList.toArray(),","));
 
-            return Result.success(article);
+            Map resultMap = new HashMap();
+
+            resultMap.put("article", article);
+            resultMap.put("nextArticle", nextArticle);
+            resultMap.put("prevArticle", prevArticle);
+
+            return Result.success(resultMap);
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure(2003, "查询异常");

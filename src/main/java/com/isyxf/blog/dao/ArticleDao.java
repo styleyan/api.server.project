@@ -55,4 +55,16 @@ public interface ArticleDao {
      * @return
      */
     Article selectByUrl(@Param("url") String url);
+
+    /**
+     * 下一篇文章 (client 端调用)
+     * @return
+     */
+    Article selectNextById(@Param("id") Integer id);
+
+    /**
+     * 上一篇文章 (client 端调用)
+     * @return
+     */
+    Article selectPrevById(@Param("id") Integer id);
 }
