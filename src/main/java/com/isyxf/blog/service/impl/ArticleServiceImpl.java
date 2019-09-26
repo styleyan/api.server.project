@@ -112,10 +112,10 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public Result search( int pageNum, int pageSize, String search) {
+    public Result search( int pageNum, int pageSize, String search, Integer state) {
         try {
             PageHelper.startPage(pageNum, pageSize);
-            PageInfo<Article> listInfo = new PageInfo<>(articleDao.search(search));
+            PageInfo<Article> listInfo = new PageInfo<>(articleDao.search(search, state));
 
             // 查询标签和分类
             Map<Integer, String> classifyList= CommonUtils.classifyListToMap(classifyDao.selectAll());

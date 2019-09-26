@@ -42,7 +42,7 @@ public interface ArticleDao {
      * @param search 搜索字符
      * @return list
      */
-    List<Article> search(@Param("search") String search);
+    List<Article> search(@Param("search") String search, @Param("state") int state);
 
     /**
      * 归档查询（client 端调用)

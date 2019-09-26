@@ -51,7 +51,14 @@
     <select id="search" parameterType="String" resultType="com.isyxf.blog.entity.Article">
         SELECT id,state,gmt_create,gmt_modify,title,url,tags,classify_id,brief
         FROM blog_article
-        WHERE title LIKE '%${search}%'
+        <where>
+            <if test="search != null">
+                title LIKE '%${search}%'
+            </if>
+            <if test="state != -1">
+                AND state = #{state}
+            </if>
+        </where>
     </select>
 
     <select id="archiveList" resultType="com.isyxf.blog.entity.Article">

@@ -13,5 +13,5 @@ public interface ArticleService {
     Result remove(int id);
     Result edit(Article article);
     Result getById(Integer id);
-    Result search(int pageNum, int pageSize, String search);
+    Result search(int pageNum, int pageSize, String search, Integer state);
 }
