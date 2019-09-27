@@ -7,6 +7,7 @@ CREATE TABLE `blog_article`(
   `title` varchar(20) unique NOT NULL COMMENT '文章标题',
   `desc` varchar(240) NOT NULL COMMENT '文章简介',
   `content` text NULL COMMENT '文章内容',
+  `md` text NULL COMMENT 'markdown内容',
   `url` varchar(120) NOT NULL unique COMMENT '定义文章链接地址',
   `state` int NOT NULL DEFAULT 0 COMMENT '是否发布状态标识, 0: 隐藏, 1: 显示',
   `tags` varchar(20) NOT NULL DEFAULT '' COMMENT '文章标签',

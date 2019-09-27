@@ -5,8 +5,8 @@
 <mapper namespace="com.isyxf.blog.dao.ArticleDao">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO blog_article (`classify_id`, `title`, brief, `content`, `url`, `state`, `tags`)
-      VALUES (#{classifyId}, #{title}, #{brief}, #{content}, #{url}, #{state}, #{tags});
+      INSERT INTO blog_article (`classify_id`, `md`,`title`, brief, `content`, `url`, `state`, `tags`)
+      VALUES (#{classifyId}, #{md}, #{title}, #{brief}, #{content}, #{url}, #{state}, #{tags});
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -35,7 +35,10 @@
               `state` = #{state},
           </if>
           <if test="tags != null">
-              `tags` = #{tags}
+              `tags` = #{tags},
+          </if>
+          <if test="md != null">
+              `md` = #{md}
           </if>
       </set>
       WHERE id=#{id};
@@ -43,7 +46,7 @@
 
     <select id="selectById" parameterType="int" resultType="com.isyxf.blog.entity.Article">
         SELECT
-        id,state,title,url,tags,classify_id,content
+        id,state,title,url,tags,classify_id,md
         FROM blog_article
         WHERE id=#{id};
     </select>
@@ -68,7 +71,7 @@
     </select>
 
     <select id="selectByUrl" resultType="com.isyxf.blog.entity.Article">
-        SELECT id,state,gmt_create,gmt_modify,title,url,tags,classify_id,content
+        SELECT id,gmt_create,title,tags,content
         FROM blog_article
         WHERE state = 1 AND url=#{url};
     </select>

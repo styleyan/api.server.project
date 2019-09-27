@@ -24,4 +24,5 @@ public class Article {
     private String content;
     private String url;
     private String tags;
+    private String md;
 }
