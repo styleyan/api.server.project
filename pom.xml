@@ -118,9 +118,9 @@
             </plugin>
             <!-- Docker maven plugin -->
             <plugin>
-                <groupId>com.isyxf</groupId>
+                <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>RELEASE</version>
+                <version>1.0.0</version>
                 <configuration>
                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
