@@ -68,7 +68,7 @@ public class UsersController {
     /**
      * 获取用户登录信息
      */
-    @RequestMapping(value = "/info", method = RequestMethod.GET, consumes = "application/json")
+    @RequestMapping(value = "/info", method = RequestMethod.POST, consumes = "application/json")
     public Result info(@CookieValue("_YXF_TOKEN_") String _YXF_TOKEN_) {
         if (StringUtils.isBlank(_YXF_TOKEN_)) {
             return Result.failure(2003, "cookie:_YXF_TOKEN_不存在值");
