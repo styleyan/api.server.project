@@ -63,3 +63,10 @@ mybatis:
   # 配置实体对象映射
   type-aliases-package: com.isyxf.blog.entity
 
+# 自定义属性
+com:
+  isyxf:
+    url: 111
+    name: Y.Jer
+    age: 28
+    add: 杭州
