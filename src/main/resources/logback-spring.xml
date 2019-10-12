@@ -161,7 +161,18 @@
         第一种把<root level="info">改成<root level="DEBUG">这样就会打印sql，不过这样日志那边会出现很多其他消息
         第二种就是单独给dao下目录配置debug模式，代码如下，这样配置sql语句会打印，其他还是正常info级别：
      -->
-
+    <appender name="MYSQL" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 可以在线上定义打印级别 -->
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <!--<level>INFO</level>-->
+        <!--</filter>-->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="com.isyxf.blog.dao" level="DEBUG" additivity="false">
+        <appender-ref ref="MYSQL"></appender-ref>
+    </logger>
 
     <!--
         root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性
@@ -169,12 +180,6 @@
         不能设置为INHERITED或者同义词NULL。默认是DEBUG
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
-
-    <!--开发环境:打印控制台-->
-    <springProfile name="dev">
-        <logger name="com.nmys.view" level="debug"/>
-    </springProfile>
-
     <root level="info">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="DEBUG_FILE" />
@@ -193,4 +198,13 @@
     <!--<appender-ref ref="WARN_FILE" />-->
     <!--</root>-->
     <!--</springProfile>-->
+
+    <!--开发环境:打印控制台-->
+    <springProfile name="dev">
+        <logger name="com.isyxf.blog" level="debug"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.isyxf.blog" level="ERROR"/>
+    </springProfile>
 </configuration>

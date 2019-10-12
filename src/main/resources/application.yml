@@ -60,7 +60,7 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   # dao 映射文件
   mapper-locations: classpath:mybatis/mapper/*.xml
-  # 配置实体对象映射
+  # 配置 bean 对象映射
   type-aliases-package: com.isyxf.blog.entity
 
 # 自定义属性
