@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isyxf.blog.dao.BooksDao">
     <sql id="field">
-        id,progress, book_name, book_score, book_reason, book_evaluate, tag_id, state, gmt_create, gmt_modify
+        id,progress, book_name, book_score, book_reason, book_evaluate, state, gmt_create, gmt_modify
     </sql>
     <insert id="insert">
-        INSERT INTO blog_books (`progress`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `tag_id`, `state`)
-        VALUES (#{progress}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{tagId}, #{state});
+        INSERT INTO blog_books (`progress`, `book_name`, `book_score`, `book_reason`, `book_evaluate`, `state`)
+        VALUES (#{progress}, #{bookName}, #{bookScore}, #{bookReason}, #{bookEvaluate}, #{state});
     </insert>
 
     <insert id="update">

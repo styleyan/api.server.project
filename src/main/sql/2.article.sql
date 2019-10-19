@@ -5,7 +5,7 @@ CREATE TABLE `blog_article`(
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `classify_id` bigint(10) COMMENT '专题分类id, 与专题表对应',
   `title` varchar(20) unique NOT NULL COMMENT '文章标题',
-  `desc` varchar(240) NOT NULL COMMENT '文章简介',
+  `brief` varchar(240) NOT NULL COMMENT '文章简介',
   `content` text NULL COMMENT '文章内容',
   `md` text NULL COMMENT 'markdown内容',
   `url` varchar(120) NOT NULL unique COMMENT '定义文章链接地址',

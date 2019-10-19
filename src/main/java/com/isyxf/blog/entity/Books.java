@@ -41,10 +41,6 @@ public class Books {
      * 是否显示
      */
     private int state;
-    /**
-     * 标签
-     */
-    private int tagId;
     private Date gmtCreate;
     private Date gmtModify;
 }
