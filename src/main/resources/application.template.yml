@@ -1,0 +1,73 @@
+spring:
+  profiles:
+    # 获取开发环境中农的配置文件，环境配置文件必须以 application-xxx.yml 的命名格式
+    active: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 服务器启动后可以通过访问: http://127.0.0.1:8080/druid/index.html，查看druid监控
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://xx.xx.xx.xx:3307/blog?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      username: root
+      password: Yxf@wn775210end
+      # 配置初始化大小/最小/最大[仅用于测试，生成环境需要修改哦]
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 获取连接等待超时时间
+      max-wait: 60000
+      # 一个连接在池中最小生存的时间
+      time-between-eviction-runs-millis: 300000
+      # 指定获取连接时连接校验的sql查询语句
+      # validation-query: SELECT 'x'
+      # 验证连接的有效性
+      test-while-idle: true
+      # 获取链接时验证，会影响性能(不建议 true)
+      test-on-borrow: false
+      # 打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  jackson:
+    # 全局配置时间戳返回格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 设置时区
+    time-zone: GMT+8
+    # 全局配置接口不返回值为 null 字段，也可以通过给实体添加注解:@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+    default-property-inclusion: non_null
+  redis:
+    # redis服务器地址
+    host: xx.xx.xxx.xx
+    # redis端口
+    port: 6379
+    # redis连接超时时间
+    timeout: 4000
+    # redis 数据库索引(默认为0)，我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 3
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 4
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+    password: xxxxx
+
+
+mybatis:
+  # mybatis 配置文件
+  config-location: classpath:mybatis/mybatis-config.xml
+  # dao 映射文件
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  # 配置 bean 对象映射
+  type-aliases-package: com.isyxf.blog.entity
+
+# 自定义属性
+com:
+  isyxf:
+    url: 111
+    name: Y.Jer
+    age: 28
+    add: 杭州
