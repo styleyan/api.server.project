@@ -3,16 +3,17 @@ const {Schema} = mongoose
 
 // 建模型
 const articleSchema = new Schema({
+  "isShow": Boolean,
+  "updateTime": Date,
+  "createTime": Date,
+  "uuid": String,
+
   "classify": String,
   "content": String,
-  "createTime": Date,
-  "isShow": Boolean,
   "title": String,
   "render": String,
   "articleId": String,
   "preMore": String,
-  "updateTime": Date,
-  "uuid": String,
 })
 
 module.exports = mongoose.model('Article', articleSchema)
