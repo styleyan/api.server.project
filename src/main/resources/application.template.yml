@@ -71,14 +71,3 @@ com:
     name: Y.Jer
     age: 28
     add: 杭州
-
-# 七牛云上传图片
-qiniu:
-  access:
-    key: 你的AK
-  secret:
-    key: 你的SK
-  bucket:
-    name: 你的bucketName
-    host:
-      name: 你的外链默认域名
