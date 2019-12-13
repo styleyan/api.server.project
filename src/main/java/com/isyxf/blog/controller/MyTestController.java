@@ -8,7 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletException;
+import java.io.IOException;
 
 /**
  * @author xiaofei.yan
@@ -29,5 +34,18 @@ public class MyTestController {
     public Result url() {
         logger.info(configBean.toString());
         return Result.success(url);
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public Result upload(@RequestParam("file") MultipartFile file) throws ServletException, IOException {
+        try{
+            if (file.getSize() > 0) {
+                System.out.println("2333, 文件大小不为0");
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Result.success("233");
     }
 }
