@@ -92,7 +92,7 @@ public class MyTestController {
         // 设置下载文件名
         String fileName = "api_server_test.txt";
         // 设置下载文件存储路径
-        String realPath= "D://fileTemp//";
+        String realPath= "I://fileTemp//";
         File file = new File(realPath, fileName);
 
         if (file.exists()) {
