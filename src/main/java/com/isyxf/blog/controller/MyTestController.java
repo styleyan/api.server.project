@@ -93,6 +93,7 @@ public class MyTestController {
         String fileName = "api_server_test.txt";
         // 设置下载文件存储路径
         String realPath= "I://fileTemp//";
+        // 建立文件对象
         File file = new File(realPath, fileName);
 
         if (file.exists()) {
@@ -105,16 +106,26 @@ public class MyTestController {
             BufferedInputStream bis = null;
 
             try {
+                // 建立链接
                 fis = new FileInputStream(file);
                 bis = new BufferedInputStream(fis);
                 OutputStream os = response.getOutputStream();
                 int i = bis.read(buffer);
 
+                //当n不等于-1,则代表未到末尾
                 while (i != -1) {
                     os.write(buffer, 0, i);
+                    // 读取文件的一个字节(8个二进制位),并将其由二进制转成十进制的整数返回
                     i = bis.read(buffer);
                 }
-                System.out.println("success");
+
+                return Result.success();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return Result.failure(1004, "上传文件为空");
+            } catch (IOException e) {
+                e.printStackTrace();
+                return Result.failure(1005, "读取过程存在异常");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
