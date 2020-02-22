@@ -47,5 +47,6 @@
               state = #{state}
           </if>
       </where>
+      ORDER BY gmt_create DESC
     </select>
 </mapper>

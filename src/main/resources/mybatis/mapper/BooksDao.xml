@@ -40,12 +40,6 @@
       DELETE FROM blog_books WHERE id=#{id};
     </delete>
 
-    <select id="selectPage" resultType="com.isyxf.blog.entity.Books">
-      SELECT
-      <include refid="field"/>
-      FROM blog_books ORDER BY gmt_create
-    </select>
-
     <select id="search" parameterType="String" resultType="com.isyxf.blog.entity.Books">
       SELECT
       <include refid="field"/>
@@ -58,6 +52,6 @@
               AND state = #{state}
           </if>
       </where>
-      ORDER BY gmt_create
+      ORDER BY gmt_create DESC
     </select>
 </mapper>

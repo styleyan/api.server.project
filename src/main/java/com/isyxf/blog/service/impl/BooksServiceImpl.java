@@ -77,7 +77,7 @@ public class BooksServiceImpl implements BooksService {
     public Result queryList(int pageNum, int pageSize) {
         try {
             PageHelper.startPage(pageNum, pageSize);
-            PageInfo<Books> listInfo = new PageInfo<>(booksDao.selectPage());
+            PageInfo<Books> listInfo = new PageInfo<>(booksDao.search(null, -1));
 
             return Result.success(listInfo);
         }catch (Exception e) {

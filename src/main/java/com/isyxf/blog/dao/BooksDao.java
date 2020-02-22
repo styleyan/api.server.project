@@ -13,12 +13,6 @@ import java.util.List;
 @Repository("booksDao")
 public interface BooksDao {
     /**
-     * 查询所有书单
-     * @return
-     */
-    List<Books> selectPage();
-
-    /**
      * 搜索书单
      */
     List<Books> search(@Param("name") String name, Integer state);

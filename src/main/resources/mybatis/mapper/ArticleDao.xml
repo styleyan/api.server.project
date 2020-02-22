@@ -62,12 +62,14 @@
                 AND state = #{state}
             </if>
         </where>
+        ORDER BY gmt_create DESC
     </select>
 
     <select id="archiveList" resultType="com.isyxf.blog.entity.Article">
         SELECT id,gmt_create,title,url,classify_id
         FROM blog_article
         WHERE state = 1
+        ORDER BY gmt_create DESC
     </select>
 
     <select id="selectByUrl" resultType="com.isyxf.blog.entity.Article">
