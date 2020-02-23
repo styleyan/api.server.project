@@ -1,36 +1,36 @@
 package com.isyxf.blog.service;
 
 import com.isyxf.blog.dto.Result;
-import com.isyxf.blog.entity.Books;
+import com.isyxf.blog.entity.Movies;
 
 /**
  * @author Y.jer
- * 书单接口
+ * 影视接口
  */
-public interface BooksService {
+public interface MoviesService {
     /**
-     * 添加书单
-     * @param books
+     * 添加影视
+     * @param movies
      * @return
      */
-    Result add(Books books);
+    Result add(Movies movies);
 
     /**
-     * 更新书单
-     * @param books
+     * 更新影视
+     * @param movies
      * @return
      */
-    Result update(Books books);
+    Result update(Movies movies);
 
     /**
-     * 删除书单
+     * 删除影视
      * @param id
      * @return
      */
     Result remove(Integer id);
 
     /**
-     * 获取书单
+     * 获取影视列表
      * @param pageNum
      * @param pageSize
      * @return
@@ -38,7 +38,7 @@ public interface BooksService {
     Result queryList(int pageNum, int pageSize);
 
     /**
-     * 搜索书单
+     * 搜索影视
      * @param pageNum
      * @param pageSize
      * @return
