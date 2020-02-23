@@ -68,25 +68,6 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     /**
-     * 影视列表
-     * @param pageNum
-     * @param pageSize
-     * @return
-     */
-    @Override
-    public Result queryList(int pageNum, int pageSize) {
-        try {
-            PageHelper.startPage(pageNum, pageSize);
-            PageInfo<Movies> listInfo = new PageInfo<>(moviesDao.search(null, -1));
-
-            return Result.success(listInfo);
-        }catch (Exception e) {
-            e.printStackTrace();
-            return Result.failure(2003, "查询失败");
-        }
-    }
-
-    /**
      * 搜索影视
      * @param pageNum
      * @param pageSize

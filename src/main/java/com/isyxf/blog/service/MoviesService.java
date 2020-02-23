@@ -30,14 +30,6 @@ public interface MoviesService {
     Result remove(Integer id);
 
     /**
-     * 获取影视列表
-     * @param pageNum
-     * @param pageSize
-     * @return
-     */
-    Result queryList(int pageNum, int pageSize);
-
-    /**
      * 搜索影视
      * @param pageNum
      * @param pageSize

@@ -23,6 +23,8 @@ public class ClientController {
     @Resource
     private BooksService booksService;
     @Resource
+    private MoviesService moviesService;
+    @Resource
     private LinkService linkService;
     @Resource
     private ClassifyService classifyService;
@@ -68,6 +70,14 @@ public class ClientController {
     @RequestMapping(value = "/books/list", method = RequestMethod.GET)
     public Result clientList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         return booksService.searchList(pageNum, pageSize, "", 1);
+    }
+
+    /**
+     * 书单
+     */
+    @RequestMapping(value = "/movies/list", method = RequestMethod.GET)
+    public Result moviesList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return moviesService.searchList(pageNum, pageSize, "", 1);
     }
 
     /**
