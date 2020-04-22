@@ -69,5 +69,16 @@ com:
   isyxf:
     url: 111
     name: Y.Jer
-    age: 28
+    age: 18
     add: 杭州
+
+# 七牛云上传图片
+qiniu:
+  access:
+    key: -
+  secret:
+    key: -
+  bucket:
+    name: -
+    host:
+      name: -
