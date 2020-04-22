@@ -1,4 +1,4 @@
-package com.isyxf.blog.controller;
+package com.isyxf.blog.controller.admin;
 
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.Classify;

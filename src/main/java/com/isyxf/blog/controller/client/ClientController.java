@@ -1,4 +1,4 @@
-package com.isyxf.blog.controller;
+package com.isyxf.blog.controller.client;
 
 import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.service.*;
