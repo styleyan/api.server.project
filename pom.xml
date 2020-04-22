@@ -84,6 +84,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <!-- 添加七牛云 sdk-->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.1.3</version>
+        </dependency>
         <!-- 文件读取 -->
         <dependency>
             <groupId>commons-io</groupId>
