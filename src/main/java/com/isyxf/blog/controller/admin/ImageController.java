@@ -27,7 +27,7 @@ import java.util.Random;
  * @Descript 图片存储相关控制器
  */
 @RestController
-@RequestMapping("/client/images")
+@RequestMapping("/api/images")
 public class ImageController {
     @Value("${qiniu.access.key}")
     private String qiNiuAccessKey;
@@ -49,7 +49,7 @@ public class ImageController {
      * @return
      */
     @PostMapping("qiniuyun")
-    public Result qiniuyun(@RequestParam("file") MultipartFile file) throws IOException {
+    public Result qiniuyun(@RequestParam("image") MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
         String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
