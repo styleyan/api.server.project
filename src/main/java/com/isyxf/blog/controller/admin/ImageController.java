@@ -49,7 +49,7 @@ public class ImageController {
      * @return
      */
     @PostMapping("qiniuyun")
-    public Result qiniuyun(@RequestParam("image") MultipartFile file) throws IOException {
+    public Result qiniuyun(@RequestParam("file") MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
         String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
