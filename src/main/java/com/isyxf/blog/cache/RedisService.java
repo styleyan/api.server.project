@@ -1,120 +1,39 @@
 package com.isyxf.blog.cache;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
 /**
- * @author xiaofei.yan
- * @Create 2019-09-18 14:17
- * @Descript redis操作的工具类
- *
- * 参考文章: https://www.cnblogs.com/superfj/p/9232482.html
+ * redis 工具类
+ * @author Y.Jer
+ * 因为暂时没有太多数据要存储，只实现几个常用的 api
  */
-@Component
-public class RedisService {
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
-
+public interface RedisService {
     /**
-     * 默认过期时长，单位:秒
-     */
-    public static final long DEFAULT_EXPIER = 60 * 60 * 24;
-
-    /**
-     * 不设置过期时长
-     */
-    public static final long NOT_EXPIRE = -1;
-
-
-    public boolean existsKey(String key) {
-        return redisTemplate.hasKey(key);
-    }
-
-    /**
-     * 重命名 key, 如果 newKey 已经存在，则newKey的原值被覆盖
-     *
-     * @param oldKey
-     * @param newKey
-     */
-    public void renameKey(String oldKey, String newKey) {
-        redisTemplate.rename(oldKey, newKey);
-    }
-
-    /**
-     * newKey不存在时才重命名
-     *
-     * @param oldKey
-     * @param newKey
+     * 普通缓存获取
+     * @param key key
      * @return
      */
-    public boolean renameKeyNotExist(String oldKey, String newKey) {
-        return redisTemplate.renameIfAbsent(oldKey, newKey);
-    }
+    String get(String key);
 
     /**
-     * 删除 key
-     *
+     * 普通缓存放入
      * @param key
-     */
-    public void deleteKey(String key) {
-        redisTemplate.delete(key);
-    }
-
-    /**
-     * 删除Key的集合
-     *
-     * @param keys
-     */
-    public void deleteKey(Collection<String> keys) {
-        Set<String> kSet = keys.stream().map(k -> k).collect(Collectors.toSet());
-        redisTemplate.delete(kSet);
-    }
-
-    /**
-     * 设置key的生命周期
-     *
-     * @param key
-     * @param time
-     * @param timeUnit
-     */
-    public void expireKey(String key, long time, TimeUnit timeUnit) {
-        redisTemplate.expire(key, time, timeUnit);
-    }
-
-    /**
-     * 指定key在指定的日期过期
-     *
-     * @param key
-     * @param date
-     */
-    public void expireKeyAt(String key, Date date) {
-        redisTemplate.expireAt(key, date);
-    }
-
-    /**
-     * 查询key的生命周期
-     *
-     * @param key
-     * @param timeUnit
+     * @param value
      * @return
      */
-    public long getKeyExpire(String key, TimeUnit timeUnit) {
-        return redisTemplate.getExpire(key, timeUnit);
-    }
+    boolean set(String key, String value);
 
     /**
-     * 将key设置为永久有效
-     *
-     * @param key
+     * 普通缓存放入并设置时间
+     * @param key key 键
+     * @param value 值
+     * @param time 时间(秒) time 要大于0 如果time小于等于0 将设置无限期
+     * @return
      */
-    public void persistKey(String key) {
-        redisTemplate.persist(key);
-    }
+    boolean set(String key, String value, long time);
+
+    /**
+     * 删除key
+     * @param key
+     * @return
+     */
+    boolean del(String key);
 }

@@ -8,14 +8,12 @@ import com.isyxf.blog.dto.Result;
 import com.isyxf.blog.entity.User;
 import com.isyxf.blog.service.UsersService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -29,12 +27,12 @@ public class UsersController {
     @Resource
     private UsersService usersService;
     @Resource
-    private ValueOperations<String, Object> valueOperations;
-    @Resource
     private RedisService redisService;
 
-    // 设置客户端cookie名
-    private static String loginKey = "_YXF_TOKEN_";
+    /**
+     * 设置客户端 cookie 前缀
+     */
+    private static String LOGIN_KEY = "_YXF_TOKEN_";
 
     /**
      * 登录
@@ -54,14 +52,14 @@ public class UsersController {
         }
 
         String uuid = UUID.randomUUID().toString().replace("-", "").toUpperCase();
-        Cookie cookie = new Cookie(loginKey, uuid);
+        Cookie cookie = new Cookie(LOGIN_KEY, uuid);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(60 * 60 * 24 * 365);
         response.addCookie(cookie);
 
         // 设置 redis 缓存
-        valueOperations.set(uuid, JSON.toJSONString(result.getResult()), 365, TimeUnit.DAYS);
+        redisService.set(uuid, JSON.toJSONString(result.getResult()), -1);
         return result;
     }
 
@@ -70,13 +68,14 @@ public class UsersController {
      */
     @RequestMapping(value = "/info", method = RequestMethod.POST, consumes = "application/json")
     public Result info(@CookieValue("_YXF_TOKEN_") String _YXF_TOKEN_) {
-        if (StringUtils.isBlank(_YXF_TOKEN_)) {
-            return Result.failure(2003, "cookie:_YXF_TOKEN_不存在值");
+        if (StringUtils.isNotBlank(_YXF_TOKEN_)) {
+            String info = redisService.get(_YXF_TOKEN_);
+
+            if (info != null) {
+                return Result.success(JSONObject.parseObject(info));
+            }
         }
-
-        String info = valueOperations.get(_YXF_TOKEN_).toString();
-
-        return Result.success(JSONObject.parseObject(info));
+        return Result.failure(2003, "cookie:_YXF_TOKEN_不存在值");
     }
 
     /**
@@ -85,11 +84,9 @@ public class UsersController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.POST, consumes = "application/json")
     public Result logout(@CookieValue("_YXF_TOKEN_") String _YXF_TOKEN_) {
-        if (StringUtils.isBlank(_YXF_TOKEN_)) {
-            return Result.failure(2003, "cookie:_YXF_TOKEN_不存在值");
+        if (StringUtils.isNotBlank(_YXF_TOKEN_)) {
+            redisService.del(_YXF_TOKEN_);
         }
-
-        redisService.deleteKey(_YXF_TOKEN_);
         return Result.success();
     }
 }
