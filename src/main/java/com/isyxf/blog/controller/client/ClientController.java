@@ -35,7 +35,7 @@ public class ClientController {
      */
     @RequestMapping(value = "/article/list", method = RequestMethod.GET)
     public Result articleList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
-        return articleService.search(pageNum,pageSize, "", 1);
+        return articleService.search(pageNum,pageSize, "", 1, null, null);
     }
 
     /**

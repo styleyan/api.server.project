@@ -19,7 +19,7 @@ public interface ArticleDao {
     int insert(Article article);
 
     /**
-     * 删除文件
+     * 删除文章
      * @param id 文章id
      */
     void delete(@Param("id") int id);
@@ -42,7 +42,12 @@ public interface ArticleDao {
      * @param search 搜索字符
      * @return list
      */
-    List<Article> search(@Param("search") String search, @Param("state") int state);
+    List<Article> search(
+            @Param("search") String search,
+            @Param("state") Integer state,
+            @Param("arrClassify") String[] arrClassify,
+            @Param("arrTags") String arrTags
+    );
 
     /**
      * 归档查询（client 端调用)

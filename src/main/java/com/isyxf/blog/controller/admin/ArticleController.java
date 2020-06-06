@@ -65,7 +65,14 @@ public class ArticleController {
      * @return
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public Result search(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize, @RequestParam("search") String search){
-        return articleService.search(pageNum, pageSize, search, -1);
+    public Result search(
+            @RequestParam("pageNum") int pageNum,
+            @RequestParam("pageSize") int pageSize,
+            @RequestParam(value = "search", required = false) String search,
+            @RequestParam(value = "state", required = false) Integer state,
+            @RequestParam(value = "tags", required = false) String tags,
+            @RequestParam(value = "classifys", required = false) String classifys){
+
+        return articleService.search(pageNum, pageSize, search, state, tags, classifys);
     }
 }

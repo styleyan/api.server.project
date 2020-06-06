@@ -58,6 +58,15 @@
             <if test="search != null">
                 title LIKE '%${search}%'
             </if>
+            <if test="arrTags != null">
+                AND concat(',', tags, ',') regexp #{arrTags}
+            </if>
+            <if test="arrClassify != null">
+                AND classify_id in
+                <foreach collection="arrClassify" item="classify" separator="," open="(" close=")">
+                    #{classify}
+                </foreach>
+            </if>
             <if test="state != -1">
                 AND state = #{state}
             </if>

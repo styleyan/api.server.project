@@ -112,10 +112,28 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public Result search( int pageNum, int pageSize, String search, Integer state) {
+    public Result search(int pageNum, int pageSize, String search, Integer state, String tags, String classify) {
         try {
+            String arrTags = null;
+            String[] arrClassify = null;
+
+            if (state == null) {
+                state = -1;
+            }
+            // 分割标签
+            if (StringUtils.isNotBlank(tags)) {
+                String temp = tags.replace(",", "|");
+                arrTags = ",("+ temp +"),";
+            }
+
+            // 分割专题
+            if (StringUtils.isNotBlank(classify)) {
+                arrClassify = classify.split(",");
+                logger.error(arrClassify.toString());
+            }
+
             PageHelper.startPage(pageNum, pageSize);
-            PageInfo<Article> listInfo = new PageInfo<>(articleDao.search(search, state));
+            PageInfo<Article> listInfo = new PageInfo<>(articleDao.search(search, state, arrClassify, arrTags));
 
             // 查询标签和分类
             Map<Integer, String> classifyList= CommonUtils.classifyListToMap(classifyDao.selectAll());
